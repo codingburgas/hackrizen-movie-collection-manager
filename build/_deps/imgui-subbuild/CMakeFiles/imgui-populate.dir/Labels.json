@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/imgui-populate"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/a48759bd1933ed0ef8c44635ef14f95e/imgui-populate.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/071096069906a82169e2888856151108/imgui-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/fcbd8b971c654c6a8cab6b9308c4ef9f/imgui-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/fcbd8b971c654c6a8cab6b9308c4ef9f/imgui-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/fcbd8b971c654c6a8cab6b9308c4ef9f/imgui-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/fcbd8b971c654c6a8cab6b9308c4ef9f/imgui-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/fcbd8b971c654c6a8cab6b9308c4ef9f/imgui-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/fcbd8b971c654c6a8cab6b9308c4ef9f/imgui-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/fcbd8b971c654c6a8cab6b9308c4ef9f/imgui-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/fcbd8b971c654c6a8cab6b9308c4ef9f/imgui-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"imgui-populate"
+		],
+		"name" : "imgui-populate"
+	}
+}

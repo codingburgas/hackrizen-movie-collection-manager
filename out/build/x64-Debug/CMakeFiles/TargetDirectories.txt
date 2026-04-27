@@ -1,0 +1,9 @@
+C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/CMakeFiles/imgui_lib.dir
+C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/CMakeFiles/mcm.dir
+C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/_deps/nlohmann_json-build/CMakeFiles/edit_cache.dir
+C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/_deps/nlohmann_json-build/CMakeFiles/rebuild_cache.dir
+C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/_deps/ixwebsocket-build/CMakeFiles/ixwebsocket.dir
+C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/_deps/ixwebsocket-build/CMakeFiles/edit_cache.dir
+C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/_deps/ixwebsocket-build/CMakeFiles/rebuild_cache.dir

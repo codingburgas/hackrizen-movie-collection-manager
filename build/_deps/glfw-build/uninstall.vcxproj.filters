@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\CMakeFiles\d1262375e6ac791e46227614e5e84a58\uninstall.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\glfw-src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\glfw-build\CMakeFiles\uninstall" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{D30DACDE-0412-3638-B672-6ADF8A000379}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

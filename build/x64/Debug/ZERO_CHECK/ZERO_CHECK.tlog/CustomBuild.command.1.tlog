@@ -1,0 +1,10 @@
+^C:\USERS\RAFAT\SOURCE\REPOS\TEST-STYNT\BUILD\CMAKEFILES\95A810DAEC28B3D4FF3E19B93DD1DDBB\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/rafat/source/repos/test-stynt -BC:/Users/rafat/source/repos/test-stynt/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/rafat/source/repos/test-stynt/build/movie_collection_manager.slnx
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

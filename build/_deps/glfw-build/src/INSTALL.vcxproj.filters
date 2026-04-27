@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\CMakeFiles\fd8a7169dc8bd9ec6c4069e2889066e6\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{D30DACDE-0412-3638-B672-6ADF8A000379}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,49 @@
+{
+	"abstract" : true,
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"_add_library",
+			"add_library"
+		],
+		"files" : 
+		[
+			"C:/Users/rafat/Desktop/vcpkg/scripts/buildsystems/vcpkg.cmake",
+			"out/build/x64-Debug/_deps/nlohmann_json-src/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 103,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 653,
+				"parent" : 1
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 9
+	},
+	"id" : "nlohmann_json::@7ad6b70f65d238af1bcf",
+	"name" : "nlohmann_json",
+	"paths" : 
+	{
+		"build" : "_deps/nlohmann_json-build",
+		"source" : "out/build/x64-Debug/_deps/nlohmann_json-src"
+	},
+	"sources" : [],
+	"type" : "INTERFACE_LIBRARY"
+}
