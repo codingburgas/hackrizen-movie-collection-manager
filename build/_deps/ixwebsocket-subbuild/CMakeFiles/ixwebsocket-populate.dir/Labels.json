@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/ixwebsocket-subbuild/CMakeFiles/ixwebsocket-populate"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/ixwebsocket-subbuild/CMakeFiles/105bd2120847c9ccf21e240b0c926f62/ixwebsocket-populate.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/ixwebsocket-subbuild/CMakeFiles/499fe8b0417b354aa1af0d1825aba2f2/ixwebsocket-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/ixwebsocket-subbuild/CMakeFiles/efb9f26bc031ebefa688af19e6f655c8/ixwebsocket-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/ixwebsocket-subbuild/CMakeFiles/efb9f26bc031ebefa688af19e6f655c8/ixwebsocket-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/ixwebsocket-subbuild/CMakeFiles/efb9f26bc031ebefa688af19e6f655c8/ixwebsocket-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/ixwebsocket-subbuild/CMakeFiles/efb9f26bc031ebefa688af19e6f655c8/ixwebsocket-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/ixwebsocket-subbuild/CMakeFiles/efb9f26bc031ebefa688af19e6f655c8/ixwebsocket-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/ixwebsocket-subbuild/CMakeFiles/efb9f26bc031ebefa688af19e6f655c8/ixwebsocket-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/ixwebsocket-subbuild/CMakeFiles/efb9f26bc031ebefa688af19e6f655c8/ixwebsocket-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/ixwebsocket-subbuild/CMakeFiles/efb9f26bc031ebefa688af19e6f655c8/ixwebsocket-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"ixwebsocket-populate"
+		],
+		"name" : "ixwebsocket-populate"
+	}
+}

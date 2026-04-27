@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\glfw-subbuild\CMakeFiles\23c28b480e0c34be9eb3f853931f33eb\glfw-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\glfw-subbuild\CMakeFiles\23c28b480e0c34be9eb3f853931f33eb\glfw-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\glfw-subbuild\CMakeFiles\23c28b480e0c34be9eb3f853931f33eb\glfw-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\glfw-subbuild\CMakeFiles\23c28b480e0c34be9eb3f853931f33eb\glfw-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\glfw-subbuild\CMakeFiles\23c28b480e0c34be9eb3f853931f33eb\glfw-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\glfw-subbuild\CMakeFiles\23c28b480e0c34be9eb3f853931f33eb\glfw-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\glfw-subbuild\CMakeFiles\23c28b480e0c34be9eb3f853931f33eb\glfw-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\glfw-subbuild\CMakeFiles\23c28b480e0c34be9eb3f853931f33eb\glfw-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\glfw-subbuild\CMakeFiles\6f993b92687b2837aec379992f2b38a6\glfw-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\glfw-subbuild\CMakeFiles\7c09bbd4a36eaeeac62c75be03938621\glfw-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\glfw-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\glfw-subbuild\CMakeFiles\glfw-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{B373B2B8-3F9D-32E7-8303-5EEB5C980ACD}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

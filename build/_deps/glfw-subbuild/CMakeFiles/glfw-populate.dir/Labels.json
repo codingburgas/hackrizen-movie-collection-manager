@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/glfw-populate"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/7c09bbd4a36eaeeac62c75be03938621/glfw-populate.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/6f993b92687b2837aec379992f2b38a6/glfw-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/23c28b480e0c34be9eb3f853931f33eb/glfw-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/23c28b480e0c34be9eb3f853931f33eb/glfw-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/23c28b480e0c34be9eb3f853931f33eb/glfw-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/23c28b480e0c34be9eb3f853931f33eb/glfw-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/23c28b480e0c34be9eb3f853931f33eb/glfw-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/23c28b480e0c34be9eb3f853931f33eb/glfw-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/23c28b480e0c34be9eb3f853931f33eb/glfw-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/23c28b480e0c34be9eb3f853931f33eb/glfw-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"glfw-populate"
+		],
+		"name" : "glfw-populate"
+	}
+}

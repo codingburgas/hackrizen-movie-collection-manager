@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\ixwebsocket-subbuild\CMakeFiles\105bd2120847c9ccf21e240b0c926f62\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{AB8B23DD-9BFA-3A6E-87C8-FE024E1B82C5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

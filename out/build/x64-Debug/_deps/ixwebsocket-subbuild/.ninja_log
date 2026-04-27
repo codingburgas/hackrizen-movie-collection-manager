@@ -1,0 +1,21 @@
+# ninja log v6
+3	41	7990143526921896	ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/ixwebsocket-populate-mkdir	443855893297eced
+3	41	7990143526921896	C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/ixwebsocket-populate-mkdir	443855893297eced
+42	2222	7990143548724825	ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/ixwebsocket-populate-download	1ac269cf9b322bcb
+42	2222	7990143548724825	C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/ixwebsocket-populate-download	1ac269cf9b322bcb
+2223	2313	7990143548765540	ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/ixwebsocket-populate-update	a570b1844b5928ca
+2223	2313	7990143548765540	C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/ixwebsocket-populate-update	a570b1844b5928ca
+2313	2350	7990143550006234	ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/ixwebsocket-populate-patch	2bf907c5afd91045
+2313	2350	7990143550006234	C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/ixwebsocket-populate-patch	2bf907c5afd91045
+2350	2387	7990143550379985	ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/ixwebsocket-populate-configure	1bcf24e19d570b36
+2350	2387	7990143550379985	C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/ixwebsocket-populate-configure	1bcf24e19d570b36
+2387	2425	7990143550764245	ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/ixwebsocket-populate-build	48a1626b3d025a67
+2387	2425	7990143550764245	C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/ixwebsocket-populate-build	48a1626b3d025a67
+2425	2463	7990143551141210	ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/ixwebsocket-populate-install	e8e3ebbd34ad0c6b
+2425	2463	7990143551141210	C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/ixwebsocket-populate-install	e8e3ebbd34ad0c6b
+2463	2499	7990143551494631	ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/ixwebsocket-populate-test	33b6bf52a945141d
+2463	2499	7990143551494631	C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/ixwebsocket-populate-test	33b6bf52a945141d
+2499	2551	7990143552010525	CMakeFiles/ixwebsocket-populate-complete	3fd5bc34a9fccfc6
+2499	2551	7990143552010525	ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/ixwebsocket-populate-done	3fd5bc34a9fccfc6
+2499	2551	7990143552010525	C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/_deps/ixwebsocket-subbuild/CMakeFiles/ixwebsocket-populate-complete	3fd5bc34a9fccfc6
+2499	2551	7990143552010525	C:/Users/rafat/source/repos/test-stynt/out/build/x64-Debug/_deps/ixwebsocket-subbuild/ixwebsocket-populate-prefix/src/ixwebsocket-populate-stamp/ixwebsocket-populate-done	3fd5bc34a9fccfc6

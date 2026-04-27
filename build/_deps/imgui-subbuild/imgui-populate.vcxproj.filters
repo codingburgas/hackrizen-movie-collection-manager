@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\fcbd8b971c654c6a8cab6b9308c4ef9f\imgui-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\fcbd8b971c654c6a8cab6b9308c4ef9f\imgui-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\fcbd8b971c654c6a8cab6b9308c4ef9f\imgui-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\fcbd8b971c654c6a8cab6b9308c4ef9f\imgui-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\fcbd8b971c654c6a8cab6b9308c4ef9f\imgui-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\fcbd8b971c654c6a8cab6b9308c4ef9f\imgui-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\fcbd8b971c654c6a8cab6b9308c4ef9f\imgui-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\fcbd8b971c654c6a8cab6b9308c4ef9f\imgui-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\071096069906a82169e2888856151108\imgui-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\a48759bd1933ed0ef8c44635ef14f95e\imgui-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\imgui-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{B7FC0190-EE63-3E27-B6C3-F791BB2540DD}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

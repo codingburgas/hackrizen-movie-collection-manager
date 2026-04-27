@@ -1,0 +1,10 @@
+^C:\USERS\RAFAT\SOURCE\REPOS\TEST-STYNT\BUILD\_DEPS\GLFW-SUBBUILD\CMAKEFILES\7C09BBD4A36EAEEAC62C75BE03938621\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild -BC:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/glfw-populate.slnx
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
