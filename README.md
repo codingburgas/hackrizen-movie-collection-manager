@@ -1,5 +1,3 @@
-sadmasdkasdas
-=======
 # Movie Collection Manager
 
 A multi-user, real-time movie collection manager written in modern C++17.
