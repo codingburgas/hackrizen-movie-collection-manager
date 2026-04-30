@@ -1,44 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\fcbd8b971c654c6a8cab6b9308c4ef9f\imgui-populate-mkdir.rule">
+    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\879ffe5d95e3f62cfaa7bc3770a400e1\imgui-populate-mkdir.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\fcbd8b971c654c6a8cab6b9308c4ef9f\imgui-populate-download.rule">
+    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\879ffe5d95e3f62cfaa7bc3770a400e1\imgui-populate-download.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\fcbd8b971c654c6a8cab6b9308c4ef9f\imgui-populate-update.rule">
+    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\879ffe5d95e3f62cfaa7bc3770a400e1\imgui-populate-update.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\fcbd8b971c654c6a8cab6b9308c4ef9f\imgui-populate-patch.rule">
+    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\879ffe5d95e3f62cfaa7bc3770a400e1\imgui-populate-patch.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\fcbd8b971c654c6a8cab6b9308c4ef9f\imgui-populate-configure.rule">
+    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\879ffe5d95e3f62cfaa7bc3770a400e1\imgui-populate-configure.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\fcbd8b971c654c6a8cab6b9308c4ef9f\imgui-populate-build.rule">
+    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\879ffe5d95e3f62cfaa7bc3770a400e1\imgui-populate-build.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\fcbd8b971c654c6a8cab6b9308c4ef9f\imgui-populate-install.rule">
+    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\879ffe5d95e3f62cfaa7bc3770a400e1\imgui-populate-install.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\fcbd8b971c654c6a8cab6b9308c4ef9f\imgui-populate-test.rule">
+    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\879ffe5d95e3f62cfaa7bc3770a400e1\imgui-populate-test.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\071096069906a82169e2888856151108\imgui-populate-complete.rule">
+    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\d164597a8e742a68fdf9a48059fc49e4\imgui-populate-complete.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\a48759bd1933ed0ef8c44635ef14f95e\imgui-populate.rule">
+    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\f5afcb70c3ec5770a4faed97ba1c3431\imgui-populate.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\rafat\source\repos\test-stynt\build\_deps\imgui-subbuild\CMakeFiles\imgui-populate" />
+    <None Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\imgui-populate" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{B7FC0190-EE63-3E27-B6C3-F791BB2540DD}</UniqueIdentifier>
+      <UniqueIdentifier>{D52DFE69-D46A-321E-8F0F-FDC435290118}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

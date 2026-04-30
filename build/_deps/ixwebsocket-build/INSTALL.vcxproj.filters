@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\rafat\source\repos\test-stynt\build\CMakeFiles\14b80500fa4cf51799af08057d2141dd\INSTALL_force.rule">
+    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\CMakeFiles\288d0986731c459eab1f6d80c5fd6b76\INSTALL_force.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{D30DACDE-0412-3638-B672-6ADF8A000379}</UniqueIdentifier>
+      <UniqueIdentifier>{FD963421-BB5A-3924-9955-1F1BE82DDD0C}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

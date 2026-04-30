@@ -19,17 +19,17 @@ project(nlohmann_json-populate NONE)
 # Pass through things we've already detected in the main project to avoid
 # paying the cost of redetecting them again in ExternalProject_Add()
 set(GIT_EXECUTABLE [==[C:/Program Files/Git/cmd/git.exe]==])
-set(Git_VERSION [==[2.50.1.windows.1]==])
+set(Git_VERSION [==[2.49.0.windows.1]==])
 set_property(GLOBAL PROPERTY _CMAKE_FindGit_GIT_EXECUTABLE_VERSION
-  [==[C:/Program Files/Git/cmd/git.exe;2.50.1.windows.1]==]
+  [==[C:/Program Files/Git/cmd/git.exe;2.49.0.windows.1]==]
 )
 
 
 include(ExternalProject)
 ExternalProject_Add(nlohmann_json-populate
                      "UPDATE_DISCONNECTED" "False" "GIT_REPOSITORY" "https://github.com/nlohmann/json.git" "EXTERNALPROJECT_INTERNAL_ARGUMENT_SEPARATOR" "GIT_TAG" "v3.11.3"
-                    SOURCE_DIR          "C:/Users/rafat/source/repos/test-stynt/build/_deps/nlohmann_json-src"
-                    BINARY_DIR          "C:/Users/rafat/source/repos/test-stynt/build/_deps/nlohmann_json-build"
+                    SOURCE_DIR          "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/nlohmann_json-src"
+                    BINARY_DIR          "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/nlohmann_json-build"
                     CONFIGURE_COMMAND   ""
                     BUILD_COMMAND       ""
                     INSTALL_COMMAND     ""

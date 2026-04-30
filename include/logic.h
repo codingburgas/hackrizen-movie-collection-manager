@@ -101,6 +101,17 @@ float averageRating(const std::vector<data::Movie>& movies);
 bool validateMovie(const data::Movie& movie, std::string& errorMessage);
 
 /**
+ * filterByStatus - returns only movies matching the given status.
+ *
+ * @param movies Source snapshot.
+ * @param status Status to keep.
+ * @return Filtered copy.
+ */
+std::vector<data::Movie> filterByStatus(
+    const std::vector<data::Movie>& movies,
+    data::Status status);
+
+/**
  * snapshotCollection - convenience wrapper around data::snapshotMovies.
  * Kept here so presentation never talks to the data layer directly.
  *

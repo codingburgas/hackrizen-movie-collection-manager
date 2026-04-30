@@ -1,6 +1,6 @@
-^C:\USERS\RAFAT\SOURCE\REPOS\TEST-STYNT\BUILD\_DEPS\IXWEBSOCKET-SRC\CMAKELISTS.TXT
+^C:\USERS\USER\SOURCE\REPOS\HACKRIZEN-MOVIE-COLLECTION-MANAGER\BUILD\_DEPS\IXWEBSOCKET-SRC\CMAKELISTS.TXT
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/rafat/source/repos/test-stynt -BC:/Users/rafat/source/repos/test-stynt/build --check-stamp-file C:/Users/rafat/source/repos/test-stynt/build/_deps/ixwebsocket-build/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/user/source/repos/hackrizen-movie-collection-manager -BC:/Users/user/source/repos/hackrizen-movie-collection-manager/build --check-stamp-file C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/ixwebsocket-build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

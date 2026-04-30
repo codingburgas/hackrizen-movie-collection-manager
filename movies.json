@@ -1,0 +1,18 @@
+{
+  "movies": [
+    {
+      "director": "chicho",
+      "durationMinutes": 167,
+      "favorite": true,
+      "genres": "johnny",
+      "id": 1,
+      "notes": "wdasda",
+      "rating": 6.699999809265137,
+      "status": 2,
+      "title": "superman",
+      "year": 2067
+    }
+  ],
+  "revision": 2,
+  "version": 2
+}

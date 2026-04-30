@@ -12,6 +12,12 @@
  * Structural programming only: everything below is free functions over
  * plain data, no classes defined locally.
  */
+// winsock2.h must come before any header that might pull in windows.h
+#if defined(_WIN32)
+#  define WIN32_LEAN_AND_MEAN
+#  include <winsock2.h>
+#endif
+
 #include <atomic>
 #include <csignal>
 #include <cstdint>
@@ -133,23 +139,56 @@ int runClientMode(const std::string& host, const std::string& port) {
  * @return Process exit code.
  */
 int main(int argc, char** argv) {
-    if (argc < 2) {
-        printUsage(argv[0]);
+#if defined(_WIN32)
+    // Initialise Winsock before any socket operations.  IXWebSocket calls
+    // initNetSystem() internally, but only after creating the first socket;
+    // an explicit WSAStartup here ensures setsockopt never fires on an
+    // uninitialised stack.
+    WSADATA wsaData;
+    if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
+        std::cerr << "WSAStartup failed.\n";
         return EXIT_FAILURE;
     }
-    const std::string mode = argv[1];
-    if (mode == "server") {
-        const std::uint16_t port = (argc >= 3)
-            ? static_cast<std::uint16_t>(std::stoi(argv[2]))
-            : static_cast<std::uint16_t>(9275);
-        const std::string persistence = (argc >= 4) ? argv[3] : std::string{};
-        return runServerMode(port, persistence);
+#endif
+
+    int exitCode = EXIT_FAILURE;
+
+    if (argc < 2) {
+        printUsage(argv[0]);
+    } else {
+        const std::string mode = argv[1];
+        if (mode == "server") {
+            std::uint16_t port = 9275;
+            bool portOk = true;
+            if (argc >= 3) {
+                try {
+                    const int p = std::stoi(argv[2]);
+                    if (p < 1 || p > 65535) {
+                        std::cerr << "Port must be between 1 and 65535.\n";
+                        portOk = false;
+                    } else {
+                        port = static_cast<std::uint16_t>(p);
+                    }
+                } catch (const std::exception&) {
+                    std::cerr << "Invalid port: " << argv[2] << "\n";
+                    portOk = false;
+                }
+            }
+            if (portOk) {
+                const std::string persistence = (argc >= 4) ? argv[3] : std::string{};
+                exitCode = runServerMode(port, persistence);
+            }
+        } else if (mode == "client") {
+            const std::string host = (argc >= 3) ? argv[2] : "127.0.0.1";
+            const std::string port = (argc >= 4) ? argv[3] : "9275";
+            exitCode = runClientMode(host, port);
+        } else {
+            printUsage(argv[0]);
+        }
     }
-    if (mode == "client") {
-        const std::string host = (argc >= 3) ? argv[2] : "127.0.0.1";
-        const std::string port = (argc >= 4) ? argv[3] : "9275";
-        return runClientMode(host, port);
-    }
-    printUsage(argv[0]);
-    return EXIT_FAILURE;
+
+#if defined(_WIN32)
+    WSACleanup();
+#endif
+    return exitCode;
 }

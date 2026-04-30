@@ -24,42 +24,22 @@ const std::unordered_map<MessageKind, std::string> KIND_TO_STRING = {
     {MessageKind::ERROR_REPLY,    "error"},
 };
 
+// Reverse of KIND_TO_STRING — used by kindFromString for O(1) lookup.
+const std::unordered_map<std::string, MessageKind> STRING_TO_KIND = [] {
+    std::unordered_map<std::string, MessageKind> m;
+    m.reserve(KIND_TO_STRING.size());
+    for (const auto& [kind, str] : KIND_TO_STRING) {
+        m[str] = kind;
+    }
+    return m;
+}();
+
 /**
- * kindFromString - reverse lookup for the "type" field. Internal.
+ * kindFromString - O(1) reverse lookup for the "type" field. Internal.
  */
 MessageKind kindFromString(const std::string& text) {
-    for (const auto& entry : KIND_TO_STRING) {
-        if (entry.second == text) {
-            return entry.first;
-        }
-    }
-    return MessageKind::UNKNOWN;
-}
-
-/**
- * movieToJson - JSON encoder for a Movie. Internal.
- */
-nlohmann::json movieToJson(const data::Movie& movie) {
-    return nlohmann::json{
-        {"id", movie.id},
-        {"title", movie.title},
-        {"year", movie.year},
-        {"rating", movie.rating},
-        {"durationMinutes", movie.durationMinutes},
-    };
-}
-
-/**
- * movieFromJson - JSON decoder for a Movie. Internal.
- */
-data::Movie movieFromJson(const nlohmann::json& node) {
-    data::Movie movie;
-    movie.id = node.value("id", std::uint64_t{0});
-    movie.title = node.value("title", std::string{});
-    movie.year = node.value("year", 0);
-    movie.rating = node.value("rating", 0.0f);
-    movie.durationMinutes = node.value("durationMinutes", 0);
-    return movie;
+    const auto it = STRING_TO_KIND.find(text);
+    return (it != STRING_TO_KIND.end()) ? it->second : MessageKind::UNKNOWN;
 }
 
 } // namespace
@@ -76,7 +56,7 @@ std::string encodeMessage(const Message& message) {
         case MessageKind::FULL_STATE: {
             nlohmann::json array = nlohmann::json::array();
             for (const data::Movie& movie : message.snapshot) {
-                array.push_back(movieToJson(movie));
+                array.push_back(data::movieToJson(movie));
             }
             root["movies"] = std::move(array);
             break;
@@ -85,7 +65,7 @@ std::string encodeMessage(const Message& message) {
         case MessageKind::EVENT_UPDATED:
         case MessageKind::REQUEST_ADD:
         case MessageKind::REQUEST_UPDATE:
-            root["movie"] = movieToJson(message.payload);
+            root["movie"] = data::movieToJson(message.payload);
             break;
         case MessageKind::EVENT_REMOVED:
         case MessageKind::REQUEST_REMOVE:
@@ -123,7 +103,7 @@ bool decodeMessage(const std::string& text, Message& out) {
         case MessageKind::FULL_STATE: {
             if (root.contains("movies") && root["movies"].is_array()) {
                 for (const auto& node : root["movies"]) {
-                    out.snapshot.push_back(movieFromJson(node));
+                    out.snapshot.push_back(data::movieFromJson(node));
                 }
             }
             break;
@@ -133,7 +113,7 @@ bool decodeMessage(const std::string& text, Message& out) {
         case MessageKind::REQUEST_ADD:
         case MessageKind::REQUEST_UPDATE: {
             if (root.contains("movie") && root["movie"].is_object()) {
-                out.payload = movieFromJson(root["movie"]);
+                out.payload = data::movieFromJson(root["movie"]);
             }
             break;
         }

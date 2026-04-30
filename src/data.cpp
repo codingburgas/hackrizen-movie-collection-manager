@@ -7,59 +7,82 @@
 #include "data.h"
 
 #include <algorithm>
+#include <filesystem>
 #include <fstream>
+#include <iostream>
 #include <limits>
-
-#include <nlohmann/json.hpp>
 
 namespace mcm::data {
 
 namespace {
 
-/**
- * clampTitle - truncates an oversize title to MAX_TITLE_LENGTH. Internal.
- */
-std::string clampTitle(const std::string& title) {
-    if (title.size() <= MAX_TITLE_LENGTH) {
-        return title;
-    }
-    return title.substr(0, MAX_TITLE_LENGTH);
+std::string clampString(const std::string& s, std::size_t maxLen) {
+    return (s.size() <= maxLen) ? s : s.substr(0, maxLen);
 }
 
-/**
- * toJson - converts a Movie into a JSON object. Internal.
- */
-nlohmann::json toJson(const Movie& movie) {
+std::string clampTitle(const std::string& title) {
+    return clampString(title, MAX_TITLE_LENGTH);
+}
+
+bool isValidStatus(int v) {
+    return v >= 0 && v <= 2;
+}
+
+// Returns false for records that should be rejected on load (corrupt file data).
+bool isValidForLoad(const Movie& movie) {
+    return !movie.title.empty()
+        && movie.year >= MIN_YEAR && movie.year <= MAX_YEAR
+        && movie.rating >= MIN_RATING && movie.rating <= MAX_RATING
+        && movie.durationMinutes > 0;
+}
+
+} // namespace
+
+nlohmann::json movieToJson(const Movie& movie) {
     return nlohmann::json{
-        {"id", movie.id},
-        {"title", movie.title},
-        {"year", movie.year},
-        {"rating", movie.rating},
+        {"id",              movie.id},
+        {"title",           movie.title},
+        {"year",            movie.year},
+        {"rating",          movie.rating},
         {"durationMinutes", movie.durationMinutes},
+        {"status",          static_cast<int>(movie.status)},
+        {"favorite",        movie.favorite},
+        {"director",        movie.director},
+        {"genres",          movie.genres},
+        {"notes",           movie.notes},
     };
 }
 
-/**
- * fromJson - parses a JSON object into a Movie. Internal.
- * Missing fields default to zero.
- */
-Movie fromJson(const nlohmann::json& node) {
+Movie movieFromJson(const nlohmann::json& node) {
     Movie movie;
-    movie.id = node.value("id", std::uint64_t{0});
-    movie.title = node.value("title", std::string{});
-    movie.year = node.value("year", 0);
-    movie.rating = node.value("rating", 0.0f);
+    movie.id              = node.value("id",              std::uint64_t{0});
+    movie.title           = node.value("title",           std::string{});
+    movie.year            = node.value("year",            0);
+    movie.rating          = node.value("rating",          0.0f);
     movie.durationMinutes = node.value("durationMinutes", 0);
+    const int statusRaw   = node.value("status", 0);
+    movie.status          = static_cast<Status>(isValidStatus(statusRaw) ? statusRaw : 0);
+    movie.favorite        = node.value("favorite",  false);
+    movie.director        = clampString(node.value("director", std::string{}), MAX_DIRECTOR_LENGTH);
+    movie.genres          = clampString(node.value("genres",   std::string{}), MAX_GENRES_LENGTH);
+    movie.notes           = clampString(node.value("notes",    std::string{}), MAX_NOTES_LENGTH);
     return movie;
 }
 
+namespace {
+void clampMovieStrings(Movie& m) {
+    m.title    = clampTitle(m.title);
+    m.director = clampString(m.director, MAX_DIRECTOR_LENGTH);
+    m.genres   = clampString(m.genres,   MAX_GENRES_LENGTH);
+    m.notes    = clampString(m.notes,    MAX_NOTES_LENGTH);
+}
 } // namespace
 
 std::uint64_t addMovie(Collection& collection, const Movie& prototype) {
     std::lock_guard<std::mutex> lock(collection.mutex);
     Movie stored = prototype;
     stored.id = collection.nextId++;
-    stored.title = clampTitle(stored.title);
+    clampMovieStrings(stored);
     collection.movies.push_back(std::move(stored));
     ++collection.revision;
     return collection.movies.back().id;
@@ -76,7 +99,7 @@ bool addMovieWithId(Collection& collection, const Movie& movie) {
         }
     }
     Movie stored = movie;
-    stored.title = clampTitle(stored.title);
+    clampMovieStrings(stored);
     collection.movies.push_back(std::move(stored));
     if (collection.nextId <= movie.id) {
         collection.nextId = movie.id + 1;
@@ -89,10 +112,15 @@ bool updateMovie(Collection& collection, const Movie& movie) {
     std::lock_guard<std::mutex> lock(collection.mutex);
     for (Movie& existing : collection.movies) {
         if (existing.id == movie.id) {
-            existing.title = clampTitle(movie.title);
-            existing.year = movie.year;
-            existing.rating = movie.rating;
+            existing.title    = clampTitle(movie.title);
+            existing.year     = movie.year;
+            existing.rating   = movie.rating;
             existing.durationMinutes = movie.durationMinutes;
+            existing.status   = movie.status;
+            existing.favorite = movie.favorite;
+            existing.director = clampString(movie.director, MAX_DIRECTOR_LENGTH);
+            existing.genres   = clampString(movie.genres,   MAX_GENRES_LENGTH);
+            existing.notes    = clampString(movie.notes,    MAX_NOTES_LENGTH);
             ++collection.revision;
             return true;
         }
@@ -150,9 +178,15 @@ bool loadFromFile(Collection& collection, const std::string& path) {
     collection.nextId = 1;
     if (root.contains("movies") && root["movies"].is_array()) {
         for (const auto& node : root["movies"]) {
-            Movie movie = fromJson(node);
+            Movie movie = movieFromJson(node);
             if (movie.id == 0) {
                 movie.id = collection.nextId;
+            }
+            movie.title = clampTitle(movie.title);
+            if (!isValidForLoad(movie)) {
+                std::clog << "[data] skipping invalid record (id=" << movie.id
+                          << ") during load\n";
+                continue;
             }
             if (collection.nextId <= movie.id) {
                 collection.nextId = movie.id + 1;
@@ -174,18 +208,50 @@ bool saveToFile(const Collection& collection, const std::string& path) {
     }
 
     nlohmann::json root;
+    root["version"]  = SCHEMA_VERSION;
     root["revision"] = revision;
     root["movies"] = nlohmann::json::array();
     for (const Movie& movie : snapshot) {
-        root["movies"].push_back(toJson(movie));
+        root["movies"].push_back(movieToJson(movie));
     }
 
-    std::ofstream stream(path, std::ios::trunc);
-    if (!stream.is_open()) {
+    // Write to a temporary file first so a crash mid-write cannot corrupt
+    // the live persistence file.
+    const std::string tmpPath = path + ".tmp";
+    {
+        std::ofstream stream(tmpPath, std::ios::trunc);
+        if (!stream.is_open()) {
+            return false;
+        }
+        stream << root.dump(2);
+        if (!stream.good()) {
+            return false;
+        }
+    }
+
+    std::error_code ec;
+    std::filesystem::rename(tmpPath, path, ec);
+    if (ec) {
+        std::clog << "[data] atomic rename failed: " << ec.message() << "\n";
+        std::filesystem::remove(tmpPath);
         return false;
     }
-    stream << root.dump(2);
-    return stream.good();
+    return true;
+}
+
+void replaceAll(Collection& collection,
+                const std::vector<Movie>& movies,
+                std::uint64_t revision) {
+    std::lock_guard<std::mutex> lock(collection.mutex);
+    collection.movies = movies;
+    collection.revision = revision;
+    std::uint64_t maxId = 0;
+    for (const Movie& movie : movies) {
+        if (movie.id > maxId) {
+            maxId = movie.id;
+        }
+    }
+    collection.nextId = maxId + 1;
 }
 
 } // namespace mcm::data

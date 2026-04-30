@@ -2,37 +2,37 @@
 	"sources" : 
 	[
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/glfw-populate"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-subbuild/CMakeFiles/glfw-populate"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/7c09bbd4a36eaeeac62c75be03938621/glfw-populate.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-subbuild/CMakeFiles/edf4fb7b30e9d8e4f46e9f4b196446d3/glfw-populate.rule"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/6f993b92687b2837aec379992f2b38a6/glfw-populate-complete.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-subbuild/CMakeFiles/1dde796c1d31dc5e0ed3585a4b634260/glfw-populate-complete.rule"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/23c28b480e0c34be9eb3f853931f33eb/glfw-populate-build.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-subbuild/CMakeFiles/d9fd9771acec61eecfadc04f1e33c32e/glfw-populate-build.rule"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/23c28b480e0c34be9eb3f853931f33eb/glfw-populate-configure.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-subbuild/CMakeFiles/d9fd9771acec61eecfadc04f1e33c32e/glfw-populate-configure.rule"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/23c28b480e0c34be9eb3f853931f33eb/glfw-populate-download.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-subbuild/CMakeFiles/d9fd9771acec61eecfadc04f1e33c32e/glfw-populate-download.rule"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/23c28b480e0c34be9eb3f853931f33eb/glfw-populate-install.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-subbuild/CMakeFiles/d9fd9771acec61eecfadc04f1e33c32e/glfw-populate-install.rule"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/23c28b480e0c34be9eb3f853931f33eb/glfw-populate-mkdir.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-subbuild/CMakeFiles/d9fd9771acec61eecfadc04f1e33c32e/glfw-populate-mkdir.rule"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/23c28b480e0c34be9eb3f853931f33eb/glfw-populate-patch.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-subbuild/CMakeFiles/d9fd9771acec61eecfadc04f1e33c32e/glfw-populate-patch.rule"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/23c28b480e0c34be9eb3f853931f33eb/glfw-populate-test.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-subbuild/CMakeFiles/d9fd9771acec61eecfadc04f1e33c32e/glfw-populate-test.rule"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/glfw-subbuild/CMakeFiles/23c28b480e0c34be9eb3f853931f33eb/glfw-populate-update.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-subbuild/CMakeFiles/d9fd9771acec61eecfadc04f1e33c32e/glfw-populate-update.rule"
 		}
 	],
 	"target" : 

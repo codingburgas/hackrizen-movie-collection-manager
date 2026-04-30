@@ -18,13 +18,29 @@
 #include <string>
 #include <vector>
 
+#include <nlohmann/json.hpp>
+
 namespace mcm::data {
 
-constexpr std::size_t MAX_TITLE_LENGTH = 256;
-constexpr int MIN_YEAR = 1880;
-constexpr int MAX_YEAR = 2200;
+constexpr int SCHEMA_VERSION = 2;
+
+constexpr std::size_t MAX_TITLE_LENGTH    = 256;
+constexpr std::size_t MAX_DIRECTOR_LENGTH = 256;
+constexpr std::size_t MAX_GENRES_LENGTH   = 512;
+constexpr std::size_t MAX_NOTES_LENGTH    = 2048;
+constexpr int MIN_YEAR    = 1880;
+constexpr int MAX_YEAR    = 2200;
 constexpr float MIN_RATING = 0.0f;
 constexpr float MAX_RATING = 10.0f;
+
+/**
+ * Status - lifecycle state of a movie in the user's collection.
+ */
+enum class Status {
+    WATCHLIST = 0,
+    WATCHED   = 1,
+    OWNED     = 2,
+};
 
 /**
  * Movie - plain-data record describing a single movie.
@@ -35,6 +51,12 @@ struct Movie {
     int year = 0;
     float rating = 0.0f;
     int durationMinutes = 0;
+    // v2 fields
+    Status status   = Status::WATCHLIST;
+    bool favorite   = false;
+    std::string director;
+    std::string genres;   // comma-separated, e.g. "Action, Drama"
+    std::string notes;
 };
 
 /**
@@ -130,6 +152,35 @@ bool loadFromFile(Collection& collection, const std::string& path);
  * @return true on success.
  */
 bool saveToFile(const Collection& collection, const std::string& path);
+
+/**
+ * replaceAll - atomically replaces the collection contents (used when a
+ * client mirrors a full server snapshot).
+ *
+ * @param collection Target collection.
+ * @param movies     New contents.
+ * @param revision   Revision counter to install.
+ */
+void replaceAll(Collection& collection,
+                const std::vector<Movie>& movies,
+                std::uint64_t revision);
+
+/**
+ * movieToJson - serialises a Movie to a JSON object.
+ *
+ * @param movie Source movie.
+ * @return nlohmann::json object.
+ */
+nlohmann::json movieToJson(const Movie& movie);
+
+/**
+ * movieFromJson - deserialises a Movie from a JSON object.
+ * Missing fields default to zero / empty.
+ *
+ * @param node Source JSON object.
+ * @return Populated Movie.
+ */
+Movie movieFromJson(const nlohmann::json& node);
 
 } // namespace mcm::data
 

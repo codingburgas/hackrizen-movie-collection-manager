@@ -2,37 +2,37 @@
 	"sources" : 
 	[
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/imgui-populate"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild/CMakeFiles/imgui-populate"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/a48759bd1933ed0ef8c44635ef14f95e/imgui-populate.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild/CMakeFiles/f5afcb70c3ec5770a4faed97ba1c3431/imgui-populate.rule"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/071096069906a82169e2888856151108/imgui-populate-complete.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild/CMakeFiles/d164597a8e742a68fdf9a48059fc49e4/imgui-populate-complete.rule"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/fcbd8b971c654c6a8cab6b9308c4ef9f/imgui-populate-build.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild/CMakeFiles/879ffe5d95e3f62cfaa7bc3770a400e1/imgui-populate-build.rule"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/fcbd8b971c654c6a8cab6b9308c4ef9f/imgui-populate-configure.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild/CMakeFiles/879ffe5d95e3f62cfaa7bc3770a400e1/imgui-populate-configure.rule"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/fcbd8b971c654c6a8cab6b9308c4ef9f/imgui-populate-download.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild/CMakeFiles/879ffe5d95e3f62cfaa7bc3770a400e1/imgui-populate-download.rule"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/fcbd8b971c654c6a8cab6b9308c4ef9f/imgui-populate-install.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild/CMakeFiles/879ffe5d95e3f62cfaa7bc3770a400e1/imgui-populate-install.rule"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/fcbd8b971c654c6a8cab6b9308c4ef9f/imgui-populate-mkdir.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild/CMakeFiles/879ffe5d95e3f62cfaa7bc3770a400e1/imgui-populate-mkdir.rule"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/fcbd8b971c654c6a8cab6b9308c4ef9f/imgui-populate-patch.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild/CMakeFiles/879ffe5d95e3f62cfaa7bc3770a400e1/imgui-populate-patch.rule"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/fcbd8b971c654c6a8cab6b9308c4ef9f/imgui-populate-test.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild/CMakeFiles/879ffe5d95e3f62cfaa7bc3770a400e1/imgui-populate-test.rule"
 		},
 		{
-			"file" : "C:/Users/rafat/source/repos/test-stynt/build/_deps/imgui-subbuild/CMakeFiles/fcbd8b971c654c6a8cab6b9308c4ef9f/imgui-populate-update.rule"
+			"file" : "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild/CMakeFiles/879ffe5d95e3f62cfaa7bc3770a400e1/imgui-populate-update.rule"
 		}
 	],
 	"target" : 

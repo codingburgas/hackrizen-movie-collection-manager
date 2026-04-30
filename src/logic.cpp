@@ -11,6 +11,7 @@
 #include <cstddef>
 #include <limits>
 #include <sstream>
+#include <unordered_map>
 
 namespace mcm::logic {
 
@@ -79,6 +80,22 @@ std::ptrdiff_t partition(std::vector<data::Movie>& movies,
     std::swap(movies[static_cast<std::size_t>(storeIndex + 1)],
               movies[static_cast<std::size_t>(high)]);
     return storeIndex + 1;
+}
+
+/**
+ * sumDurationsImpl - helper for totalDurationRecursive that walks selectedIds
+ * with O(1) per-step lookups into a pre-built id→duration map.
+ */
+long long sumDurationsImpl(
+    const std::unordered_map<std::uint64_t, int>& durationMap,
+    const std::vector<std::uint64_t>& selectedIds,
+    std::size_t cursor) {
+    if (cursor >= selectedIds.size()) {
+        return 0;
+    }
+    const auto it = durationMap.find(selectedIds[cursor]);
+    const long long current = (it != durationMap.end()) ? it->second : 0LL;
+    return current + sumDurationsImpl(durationMap, selectedIds, cursor + 1);
 }
 
 /**
@@ -153,17 +170,26 @@ long long totalDurationRecursive(
     const std::vector<data::Movie>& movies,
     const std::vector<std::uint64_t>& selectedIds,
     std::size_t cursor) {
-    // Base case: exhausted the selection.
+    // Build an O(1) id→duration map on first entry, then delegate to the
+    // recursive helper to keep per-step lookups cheap.
+    if (cursor == 0) {
+        std::unordered_map<std::uint64_t, int> durationMap;
+        durationMap.reserve(movies.size());
+        for (const data::Movie& movie : movies) {
+            durationMap[movie.id] = movie.durationMinutes;
+        }
+        return sumDurationsImpl(durationMap, selectedIds, 0);
+    }
+    // cursor != 0 path retained for callers that enter mid-sequence, though
+    // no such call sites exist in the current codebase.
     if (cursor >= selectedIds.size()) {
         return 0;
     }
-    // Inductive step: add this movie's duration (if it still exists)
-    // and recurse on the tail.
     const std::size_t index = data::findIndexById(movies, selectedIds[cursor]);
-    const long long currentDuration = (index == std::numeric_limits<std::size_t>::max())
+    const long long current = (index == std::numeric_limits<std::size_t>::max())
         ? 0
         : static_cast<long long>(movies[index].durationMinutes);
-    return currentDuration + totalDurationRecursive(movies, selectedIds, cursor + 1);
+    return current + totalDurationRecursive(movies, selectedIds, cursor + 1);
 }
 
 float averageRating(const std::vector<data::Movie>& movies) {
@@ -207,6 +233,19 @@ bool validateMovie(const data::Movie& movie, std::string& errorMessage) {
     return true;
 }
 
+std::vector<data::Movie> filterByStatus(
+    const std::vector<data::Movie>& movies,
+    data::Status status) {
+    std::vector<data::Movie> result;
+    result.reserve(movies.size());
+    for (const data::Movie& movie : movies) {
+        if (movie.status == status) {
+            result.push_back(movie);
+        }
+    }
+    return result;
+}
+
 std::vector<data::Movie> snapshotCollection(const data::Collection& collection) {
     return data::snapshotMovies(collection);
 }
@@ -214,16 +253,7 @@ std::vector<data::Movie> snapshotCollection(const data::Collection& collection) 
 void replaceMirror(data::Collection& collection,
                    const std::vector<data::Movie>& movies,
                    std::uint64_t revision) {
-    std::lock_guard<std::mutex> lock(collection.mutex);
-    collection.movies = movies;
-    collection.revision = revision;
-    std::uint64_t maxId = 0;
-    for (const data::Movie& movie : movies) {
-        if (movie.id > maxId) {
-            maxId = movie.id;
-        }
-    }
-    collection.nextId = maxId + 1;
+    data::replaceAll(collection, movies, revision);
 }
 
 bool applyEventToMirror(data::Collection& collection,

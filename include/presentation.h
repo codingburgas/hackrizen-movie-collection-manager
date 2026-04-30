@@ -33,13 +33,21 @@ struct UiState {
     char searchBuffer[256] = "";
 
     // New-movie form fields.
-    char formTitle[256] = "";
-    int formYear = 2024;
+    char formTitle[256]    = "";
+    char formDirector[256] = "";
+    char formGenres[512]   = "";
+    char formNotes[2048]   = "";
+    int formYear     = 2024;
     float formRating = 7.5f;
     int formDuration = 120;
+    int formStatus   = 0;    // cast of data::Status
+    bool formFavorite = false;
 
     // Edit target (0 = creating a new entry).
     std::uint64_t editingId = 0;
+
+    // Id pending confirmation before deletion (0 = none).
+    std::uint64_t pendingDeleteId = 0;
 
     // Selection set for the recursive duration calculation.
     std::unordered_set<std::uint64_t> selectedIds;

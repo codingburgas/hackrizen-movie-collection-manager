@@ -7,28 +7,28 @@
 		<BuildType Name="RelWithDebInfo"/>
 		<Platform Name="x64"/>
 	</Configurations>
-	<Project Path="imgui_lib.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="6e84f98a-370e-3352-8409-1234326f8e65">
+	<Project Path="imgui_lib.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="85e5aaba-d7d1-3696-9cd2-829d138d989d">
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 		<BuildDependency Project="_deps/glfw-build/src/glfw.vcxproj"/>
 	</Project>
-	<Project Path="_deps/ixwebsocket-build/ixwebsocket.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="89249d27-9189-3c6c-b042-b3c37bd6d555">
+	<Project Path="_deps/ixwebsocket-build/ixwebsocket.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="5da7357e-cf7b-37b7-9e1e-f030cb9b45df">
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 	</Project>
-	<Project Path="mcm.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="d113760e-cc0a-3e0d-95c9-5dc3567a4708">
+	<Project Path="mcm.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="ee0c3664-ed7d-3940-a851-fee257aa2fcb">
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 		<BuildDependency Project="_deps/glfw-build/src/glfw.vcxproj"/>
 		<BuildDependency Project="imgui_lib.vcxproj"/>
 		<BuildDependency Project="_deps/ixwebsocket-build/ixwebsocket.vcxproj"/>
 	</Project>
 	<Folder Name="/CMakePredefinedTargets/">
-		<Project Path="ALL_BUILD.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="cf632569-6456-3296-a1de-5cdd3f4444dd" DefaultStartup="true">
+		<Project Path="ALL_BUILD.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="4bf67d74-70e8-36d3-aa13-fc54ccef412c" DefaultStartup="true">
 			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 			<BuildDependency Project="_deps/glfw-build/src/glfw.vcxproj"/>
 			<BuildDependency Project="imgui_lib.vcxproj"/>
 			<BuildDependency Project="_deps/ixwebsocket-build/ixwebsocket.vcxproj"/>
 			<BuildDependency Project="mcm.vcxproj"/>
 		</Project>
-		<Project Path="INSTALL.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="58afbdbd-4b0d-374d-b6cf-56321d5d5c9a">
+		<Project Path="INSTALL.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="61325ee6-a3b6-3ca2-bfc1-158dd96362e0">
 			<BuildDependency Project="ALL_BUILD.vcxproj"/>
 			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 			<Build Solution="Debug|*" Project="false"/>
@@ -36,20 +36,20 @@
 			<Build Solution="MinSizeRel|*" Project="false"/>
 			<Build Solution="RelWithDebInfo|*" Project="false"/>
 		</Project>
-		<Project Path="ZERO_CHECK.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="d1e034cb-27cc-370e-b705-2612418783c3"/>
+		<Project Path="ZERO_CHECK.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="6f2cf422-ef5a-33dd-a6af-41df338d9daa"/>
 	</Folder>
 	<Folder Name="/GLFW3/">
-		<Project Path="_deps/glfw-build/src/glfw.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="b55669fa-14df-353f-a31e-f8ff89c559b7">
+		<Project Path="_deps/glfw-build/src/glfw.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="59155e09-b20f-3ffc-971a-0350d49aa6fe">
 			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 		</Project>
-		<Project Path="_deps/glfw-build/uninstall.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="c98ed0c8-6c27-337c-9f18-ffea4f7a2cb5">
+		<Project Path="_deps/glfw-build/uninstall.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="94007082-71fc-3f22-9982-45bb71bec542">
 			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 			<Build Solution="Debug|*" Project="false"/>
 			<Build Solution="Release|*" Project="false"/>
 			<Build Solution="MinSizeRel|*" Project="false"/>
 			<Build Solution="RelWithDebInfo|*" Project="false"/>
 		</Project>
-		<Project Path="_deps/glfw-build/src/update_mappings.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="f708e879-2c99-3a1a-b0c5-65a78c55817e">
+		<Project Path="_deps/glfw-build/src/update_mappings.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="f0ba11c1-faab-3799-b529-3ad58789f0ff">
 			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 			<Build Solution="Debug|*" Project="false"/>
 			<Build Solution="Release|*" Project="false"/>
