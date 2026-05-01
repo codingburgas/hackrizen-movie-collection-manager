@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\912fc689eaedc87c1b922c9d02a1c2bb\generate.stamp.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\5222a72619f05de472a035c44b986b5d\generate.stamp.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{2BE50B6B-ADDB-312B-A284-DD2ACE03D54A}</UniqueIdentifier>
+      <UniqueIdentifier>{A464DE2A-7E64-3AB0-9EA0-555E13AADC93}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

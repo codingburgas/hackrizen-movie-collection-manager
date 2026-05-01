@@ -1,6 +1,6 @@
-^C:\USERS\USER\SOURCE\REPOS\HACKRIZEN-MOVIE-COLLECTION-MANAGER\BUILD\_DEPS\NLOHMANN_JSON-SUBBUILD\CMAKEFILES\C000CA40B5609F14BEEA076D17A6E5AE\GENERATE.STAMP.RULE
+^C:\USERS\RAFAT\SOURCE\REPOS\HACKRIZEN-MOVIE-COLLECTION-MANAGER\BUILD\_DEPS\NLOHMANN_JSON-SUBBUILD\CMAKEFILES\C5F97A1CA18CC196AEAB98DE4688DBA0\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/nlohmann_json-subbuild -BC:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/nlohmann_json-subbuild --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate.slnx
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/nlohmann_json-subbuild -BC:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/nlohmann_json-subbuild --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate.slnx
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

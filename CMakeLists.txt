@@ -100,7 +100,7 @@ set(MCM_SOURCES
 )
 
 if(IMGUI_AVAILABLE)
-    list(APPEND MCM_SOURCES src/presentation.cpp)
+    list(APPEND MCM_SOURCES src/presentation.cpp src/theme.cpp)
 endif()
 
 add_executable(mcm ${MCM_SOURCES})
@@ -113,6 +113,11 @@ target_link_libraries(mcm PRIVATE
 if(IMGUI_AVAILABLE)
     target_link_libraries(mcm PRIVATE imgui_lib)
     target_compile_definitions(mcm PRIVATE MCM_HAS_IMGUI=1)
+
+    add_custom_command(TARGET mcm POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_SOURCE_DIR}/assets
+            $<TARGET_FILE_DIR:mcm>/assets)
 endif()
 
 if(WIN32)

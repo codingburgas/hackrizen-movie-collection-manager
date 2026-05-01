@@ -11,6 +11,7 @@
 #endif
 
 #include "presentation.h"
+#include "theme.h"
 
 #include <algorithm>
 #include <cstdio>
@@ -377,7 +378,7 @@ void renderStatusBar(UiState& state) {
                 state.totalSelectedMinutes,
                 static_cast<double>(state.totalSelectedMinutes) / 60.0);
     if (!state.statusMessage.empty()) {
-        ImGui::TextColored(ImVec4(0.9f, 0.8f, 0.2f, 1.0f), "%s", state.statusMessage.c_str());
+        ImGui::TextColored(ImVec4(0.85f, 0.42f, 0.05f, 1.0f), "%s", state.statusMessage.c_str());
     }
 }
 
@@ -428,7 +429,8 @@ bool initialisePresentation(const std::string& windowTitle) {
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-    ImGui::StyleColorsDark();
+    theme::loadFonts();
+    theme::applyLightOrange();
     ImGui_ImplGlfw_InitForOpenGL(windowHandle, true);
     ImGui_ImplOpenGL3_Init("#version 330");
     return true;
@@ -526,7 +528,7 @@ void runMainLoop(UiState& state, network::Client& client) {
         int displayHeight = 0;
         glfwGetFramebufferSize(windowHandle, &displayWidth, &displayHeight);
         glViewport(0, 0, displayWidth, displayHeight);
-        glClearColor(0.10f, 0.11f, 0.13f, 1.0f);
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         glfwSwapBuffers(windowHandle);

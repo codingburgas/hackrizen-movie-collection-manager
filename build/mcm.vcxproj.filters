@@ -1,34 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\src\data.cpp">
+    <ClCompile Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\src\data.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\src\logic.cpp">
+    <ClCompile Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\src\logic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\src\protocol.cpp">
+    <ClCompile Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\src\protocol.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\src\network.cpp">
+    <ClCompile Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\src\network.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\src\main.cpp">
+    <ClCompile Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\src\presentation.cpp">
+    <ClCompile Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\src\presentation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\src\theme.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Natvis Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\nlohmann_json-src\nlohmann_json.natvis" />
+    <Natvis Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\nlohmann_json-src\nlohmann_json.natvis" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{A88597F3-F7F6-3170-8660-37A4ABA89AF5}</UniqueIdentifier>
+      <UniqueIdentifier>{4905C1AA-8D85-301A-9916-DD48A9825B2B}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
