@@ -1,44 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\fbf7438523ac1f07c4701ea7f46a14d1\ixwebsocket-populate-mkdir.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\ffb7f4043b29318688e80c16ff8fbc32\ixwebsocket-populate-mkdir.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\fbf7438523ac1f07c4701ea7f46a14d1\ixwebsocket-populate-download.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\ffb7f4043b29318688e80c16ff8fbc32\ixwebsocket-populate-download.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\fbf7438523ac1f07c4701ea7f46a14d1\ixwebsocket-populate-update.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\ffb7f4043b29318688e80c16ff8fbc32\ixwebsocket-populate-update.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\fbf7438523ac1f07c4701ea7f46a14d1\ixwebsocket-populate-patch.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\ffb7f4043b29318688e80c16ff8fbc32\ixwebsocket-populate-patch.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\fbf7438523ac1f07c4701ea7f46a14d1\ixwebsocket-populate-configure.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\ffb7f4043b29318688e80c16ff8fbc32\ixwebsocket-populate-configure.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\fbf7438523ac1f07c4701ea7f46a14d1\ixwebsocket-populate-build.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\ffb7f4043b29318688e80c16ff8fbc32\ixwebsocket-populate-build.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\fbf7438523ac1f07c4701ea7f46a14d1\ixwebsocket-populate-install.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\ffb7f4043b29318688e80c16ff8fbc32\ixwebsocket-populate-install.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\fbf7438523ac1f07c4701ea7f46a14d1\ixwebsocket-populate-test.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\ffb7f4043b29318688e80c16ff8fbc32\ixwebsocket-populate-test.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\e67e132aa3985a9b0a5de943b598a474\ixwebsocket-populate-complete.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\fda43b8a02cdc4752884f3be93919815\ixwebsocket-populate-complete.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\912fc689eaedc87c1b922c9d02a1c2bb\ixwebsocket-populate.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\5222a72619f05de472a035c44b986b5d\ixwebsocket-populate.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\ixwebsocket-populate" />
+    <None Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\ixwebsocket-populate" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{2BE50B6B-ADDB-312B-A284-DD2ACE03D54A}</UniqueIdentifier>
+      <UniqueIdentifier>{A464DE2A-7E64-3AB0-9EA0-555E13AADC93}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

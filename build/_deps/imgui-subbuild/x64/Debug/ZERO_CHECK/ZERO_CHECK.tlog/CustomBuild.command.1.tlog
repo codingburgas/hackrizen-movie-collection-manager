@@ -1,6 +1,6 @@
-^C:\USERS\USER\SOURCE\REPOS\HACKRIZEN-MOVIE-COLLECTION-MANAGER\BUILD\_DEPS\IMGUI-SUBBUILD\CMAKEFILES\F5AFCB70C3EC5770A4FAED97BA1C3431\GENERATE.STAMP.RULE
+^C:\USERS\RAFAT\SOURCE\REPOS\HACKRIZEN-MOVIE-COLLECTION-MANAGER\BUILD\_DEPS\IMGUI-SUBBUILD\CMAKEFILES\75C79A5201ED760C547A817D2E90B712\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild -BC:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild/imgui-populate.slnx
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild -BC:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild/imgui-populate.slnx
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\CMakeFiles\288d0986731c459eab1f6d80c5fd6b76\INSTALL_force.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\CMakeFiles\b2f12f1f2745ea150c7493844bae6acb\INSTALL_force.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{FD963421-BB5A-3924-9955-1F1BE82DDD0C}</UniqueIdentifier>
+      <UniqueIdentifier>{E312873F-8F26-313D-9912-4A3A5D4A236D}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

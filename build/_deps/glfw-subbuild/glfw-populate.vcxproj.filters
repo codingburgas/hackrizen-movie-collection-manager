@@ -1,44 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\d9fd9771acec61eecfadc04f1e33c32e\glfw-populate-mkdir.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\d4e08b2a3318cec2c6bb6986d8df9d5f\glfw-populate-mkdir.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\d9fd9771acec61eecfadc04f1e33c32e\glfw-populate-download.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\d4e08b2a3318cec2c6bb6986d8df9d5f\glfw-populate-download.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\d9fd9771acec61eecfadc04f1e33c32e\glfw-populate-update.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\d4e08b2a3318cec2c6bb6986d8df9d5f\glfw-populate-update.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\d9fd9771acec61eecfadc04f1e33c32e\glfw-populate-patch.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\d4e08b2a3318cec2c6bb6986d8df9d5f\glfw-populate-patch.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\d9fd9771acec61eecfadc04f1e33c32e\glfw-populate-configure.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\d4e08b2a3318cec2c6bb6986d8df9d5f\glfw-populate-configure.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\d9fd9771acec61eecfadc04f1e33c32e\glfw-populate-build.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\d4e08b2a3318cec2c6bb6986d8df9d5f\glfw-populate-build.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\d9fd9771acec61eecfadc04f1e33c32e\glfw-populate-install.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\d4e08b2a3318cec2c6bb6986d8df9d5f\glfw-populate-install.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\d9fd9771acec61eecfadc04f1e33c32e\glfw-populate-test.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\d4e08b2a3318cec2c6bb6986d8df9d5f\glfw-populate-test.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\1dde796c1d31dc5e0ed3585a4b634260\glfw-populate-complete.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\1975a1c3618f08737858ae2cf21a648f\glfw-populate-complete.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\edf4fb7b30e9d8e4f46e9f4b196446d3\glfw-populate.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\24c4274a3d2e558f0d6ca5a0fa35db79\glfw-populate.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\glfw-populate" />
+    <None Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\glfw-populate" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{213009AF-9594-3125-B195-C094D36021B3}</UniqueIdentifier>
+      <UniqueIdentifier>{E92D2611-62FE-3D1D-8B1E-D0EBE7F3F3ED}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -5,16 +5,16 @@
 		<Platform Name="x64"/>
 	</Configurations>
 	<Folder Name="/CMakePredefinedTargets/">
-		<Project Path="ALL_BUILD.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="bb0a561d-7c41-36f2-8334-b558ab2cc32a" DefaultStartup="true">
+		<Project Path="ALL_BUILD.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="d15a5969-b51a-3512-8f6a-cc7d47cee49d" DefaultStartup="true">
 			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 			<BuildDependency Project="glfw-populate.vcxproj"/>
 			<Build Solution="Debug|*" Project="false"/>
 		</Project>
-		<Project Path="ZERO_CHECK.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="94c0673c-97b8-37ca-a2f8-1886f66312a3"/>
+		<Project Path="ZERO_CHECK.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="45a6a35a-f2d0-331e-93b9-9311fe0be7d8"/>
 	</Folder>
 	<Folder Name="/ExternalProjectTargets/"/>
 	<Folder Name="/ExternalProjectTargets/glfw-populate/">
-		<Project Path="glfw-populate.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="38a3acfd-3340-3d82-aea7-3d004507f848">
+		<Project Path="glfw-populate.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="241da7f4-2f9b-34e9-8c7b-ed35689967b7">
 			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 		</Project>
 	</Folder>

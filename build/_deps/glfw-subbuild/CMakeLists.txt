@@ -18,18 +18,18 @@ project(glfw-populate NONE)
 
 # Pass through things we've already detected in the main project to avoid
 # paying the cost of redetecting them again in ExternalProject_Add()
-set(GIT_EXECUTABLE [==[C:/Program Files/Git/cmd/git.exe]==])
-set(Git_VERSION [==[2.49.0.windows.1]==])
+set(GIT_EXECUTABLE [==[C:/Program Files/Git/mingw64/bin/git.exe]==])
+set(Git_VERSION [==[2.50.1.windows.1]==])
 set_property(GLOBAL PROPERTY _CMAKE_FindGit_GIT_EXECUTABLE_VERSION
-  [==[C:/Program Files/Git/cmd/git.exe;2.49.0.windows.1]==]
+  [==[C:/Program Files/Git/mingw64/bin/git.exe;2.50.1.windows.1]==]
 )
 
 
 include(ExternalProject)
 ExternalProject_Add(glfw-populate
                      "UPDATE_DISCONNECTED" "False" "GIT_REPOSITORY" "https://github.com/glfw/glfw.git" "EXTERNALPROJECT_INTERNAL_ARGUMENT_SEPARATOR" "GIT_TAG" "3.4"
-                    SOURCE_DIR          "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-src"
-                    BINARY_DIR          "C:/Users/user/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-build"
+                    SOURCE_DIR          "C:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-src"
+                    BINARY_DIR          "C:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-build"
                     CONFIGURE_COMMAND   ""
                     BUILD_COMMAND       ""
                     INSTALL_COMMAND     ""

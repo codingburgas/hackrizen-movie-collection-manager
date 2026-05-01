@@ -1,44 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\879ffe5d95e3f62cfaa7bc3770a400e1\imgui-populate-mkdir.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\acd1972ccb90f3764cc5384d61bdcb49\imgui-populate-mkdir.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\879ffe5d95e3f62cfaa7bc3770a400e1\imgui-populate-download.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\acd1972ccb90f3764cc5384d61bdcb49\imgui-populate-download.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\879ffe5d95e3f62cfaa7bc3770a400e1\imgui-populate-update.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\acd1972ccb90f3764cc5384d61bdcb49\imgui-populate-update.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\879ffe5d95e3f62cfaa7bc3770a400e1\imgui-populate-patch.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\acd1972ccb90f3764cc5384d61bdcb49\imgui-populate-patch.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\879ffe5d95e3f62cfaa7bc3770a400e1\imgui-populate-configure.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\acd1972ccb90f3764cc5384d61bdcb49\imgui-populate-configure.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\879ffe5d95e3f62cfaa7bc3770a400e1\imgui-populate-build.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\acd1972ccb90f3764cc5384d61bdcb49\imgui-populate-build.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\879ffe5d95e3f62cfaa7bc3770a400e1\imgui-populate-install.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\acd1972ccb90f3764cc5384d61bdcb49\imgui-populate-install.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\879ffe5d95e3f62cfaa7bc3770a400e1\imgui-populate-test.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\acd1972ccb90f3764cc5384d61bdcb49\imgui-populate-test.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\d164597a8e742a68fdf9a48059fc49e4\imgui-populate-complete.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\e77366930b9b1881bbbf88bccaaa3dcf\imgui-populate-complete.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\f5afcb70c3ec5770a4faed97ba1c3431\imgui-populate.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\75c79a5201ed760c547a817d2e90b712\imgui-populate.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\imgui-populate" />
+    <None Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\imgui-subbuild\CMakeFiles\imgui-populate" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{D52DFE69-D46A-321E-8F0F-FDC435290118}</UniqueIdentifier>
+      <UniqueIdentifier>{169247D8-A3FB-33E5-B091-734AE8C3CEB6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

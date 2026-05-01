@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\user\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\edf4fb7b30e9d8e4f46e9f4b196446d3\generate.stamp.rule">
+    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-subbuild\CMakeFiles\24c4274a3d2e558f0d6ca5a0fa35db79\generate.stamp.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{213009AF-9594-3125-B195-C094D36021B3}</UniqueIdentifier>
+      <UniqueIdentifier>{E92D2611-62FE-3D1D-8B1E-D0EBE7F3F3ED}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
