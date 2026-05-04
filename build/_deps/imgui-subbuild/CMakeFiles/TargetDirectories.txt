@@ -1,3 +1,0 @@
-C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild/CMakeFiles/imgui-populate.dir
-C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild/CMakeFiles/ALL_BUILD.dir
-C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/build/_deps/imgui-subbuild/CMakeFiles/ZERO_CHECK.dir
