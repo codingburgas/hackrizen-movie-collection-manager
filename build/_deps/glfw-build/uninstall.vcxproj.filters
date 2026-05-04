@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\CMakeFiles\652a36d78af87129295ccb7060a65188\uninstall.rule">
+    <CustomBuild Include="C:\Users\Petar\source\repos\hackrizen-movie-collection-manager\build\CMakeFiles\51584547bdfad253d9b24a1b0e3b0d1e\uninstall.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-src\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\Petar\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-src\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-build\CMakeFiles\uninstall" />
+    <None Include="C:\Users\Petar\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-build\CMakeFiles\uninstall" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{E312873F-8F26-313D-9912-4A3A5D4A236D}</UniqueIdentifier>
+      <UniqueIdentifier>{B4431292-65A7-3C52-B5DC-C36A2852CC57}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -13,7 +13,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{FABD8A8F-12FE-3AC7-BA8A-3F04E9226B55}</ProjectGuid>
+    <ProjectGuid>{11E28145-067C-3C8A-BFF6-3AB95795A585}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
@@ -49,12 +49,12 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\5222a72619f05de472a035c44b986b5d\generate.stamp.rule">
+    <CustomBuild Include="C:\Users\Petar\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\d68281fa400a51392006ca471e00d480\generate.stamp.rule">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
       <BuildInParallel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</BuildInParallel>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Checking Build System</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/ixwebsocket-subbuild -BC:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/ixwebsocket-subbuild --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/ixwebsocket-subbuild/ixwebsocket-populate.slnx
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Petar/source/repos/hackrizen-movie-collection-manager/build/_deps/ixwebsocket-subbuild -BC:/Users/Petar/source/repos/hackrizen-movie-collection-manager/build/_deps/ixwebsocket-subbuild --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/build/_deps/ixwebsocket-subbuild/ixwebsocket-populate.slnx
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -62,8 +62,8 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-4.3\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.3\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.3\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.3\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.3\Modules\ExternalProject.cmake;C:\Program Files\CMake\share\cmake-4.3\Modules\ExternalProject\PatchInfo.txt.in;C:\Program Files\CMake\share\cmake-4.3\Modules\ExternalProject\RepositoryInfo.txt.in;C:\Program Files\CMake\share\cmake-4.3\Modules\ExternalProject\UpdateInfo.txt.in;C:\Program Files\CMake\share\cmake-4.3\Modules\ExternalProject\cfgcmd.txt.in;C:\Program Files\CMake\share\cmake-4.3\Modules\ExternalProject\gitclone.cmake.in;C:\Program Files\CMake\share\cmake-4.3\Modules\ExternalProject\gitupdate.cmake.in;C:\Program Files\CMake\share\cmake-4.3\Modules\ExternalProject\mkdirs.cmake.in;C:\Program Files\CMake\share\cmake-4.3\Modules\ExternalProject\shared_internal_commands.cmake;C:\Program Files\CMake\share\cmake-4.3\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.3\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.3\Modules\Platform\WindowsPaths.cmake;C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\4.3.2\CMakeSystem.cmake;C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeLists.txt;C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\ixwebsocket-populate-prefix\tmp\ixwebsocket-populate-mkdirs.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-4.3\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.3\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.3\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.3\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.3\Modules\ExternalProject.cmake;C:\Program Files\CMake\share\cmake-4.3\Modules\ExternalProject\PatchInfo.txt.in;C:\Program Files\CMake\share\cmake-4.3\Modules\ExternalProject\RepositoryInfo.txt.in;C:\Program Files\CMake\share\cmake-4.3\Modules\ExternalProject\UpdateInfo.txt.in;C:\Program Files\CMake\share\cmake-4.3\Modules\ExternalProject\cfgcmd.txt.in;C:\Program Files\CMake\share\cmake-4.3\Modules\ExternalProject\gitclone.cmake.in;C:\Program Files\CMake\share\cmake-4.3\Modules\ExternalProject\gitupdate.cmake.in;C:\Program Files\CMake\share\cmake-4.3\Modules\ExternalProject\mkdirs.cmake.in;C:\Program Files\CMake\share\cmake-4.3\Modules\ExternalProject\shared_internal_commands.cmake;C:\Program Files\CMake\share\cmake-4.3\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.3\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.3\Modules\Platform\WindowsPaths.cmake;C:\Users\Petar\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\4.3.2\CMakeSystem.cmake;C:\Users\Petar\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeLists.txt;C:\Users\Petar\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\ixwebsocket-populate-prefix\tmp\ixwebsocket-populate-mkdirs.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Petar\source\repos\hackrizen-movie-collection-manager\build\_deps\ixwebsocket-subbuild\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>

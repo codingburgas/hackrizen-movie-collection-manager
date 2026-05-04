@@ -1,4 +1,4 @@
 Name: nlohmann_json
 Description: JSON for Modern C++
 Version: 3.11.3
-Cflags: -IC:/Users/user/source/repos/hackrizen-movie-collection-manager/out/install/x64-Debug/include
+Cflags: -IC:/Users/Petar/source/repos/hackrizen-movie-collection-manager/out/install/x64-Debug/include

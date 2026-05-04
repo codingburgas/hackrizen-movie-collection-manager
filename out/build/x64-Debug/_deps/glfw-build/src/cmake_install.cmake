@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/user/source/repos/hackrizen-movie-collection-manager/out/build/x64-Debug/_deps/glfw-src/src
+# Install script for directory: C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/out/build/x64-Debug/_deps/glfw-src/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/user/source/repos/hackrizen-movie-collection-manager/out/install/x64-Debug")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/out/install/x64-Debug")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,12 +33,12 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/Users/user/source/repos/hackrizen-movie-collection-manager/out/build/x64-Debug/_deps/glfw-build/src/glfw3.lib")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/out/build/x64-Debug/_deps/glfw-build/src/glfw3.lib")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "C:/Users/user/source/repos/hackrizen-movie-collection-manager/out/build/x64-Debug/_deps/glfw-build/src/install_local_manifest.txt"
+  file(WRITE "C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/out/build/x64-Debug/_deps/glfw-build/src/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

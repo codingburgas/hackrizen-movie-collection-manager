@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\CMakeFiles\11854da4a60695e2f21b6a3bf11bb345\update_mappings.rule">
+    <CustomBuild Include="C:\Users\Petar\source\repos\hackrizen-movie-collection-manager\build\CMakeFiles\a224bbef1168223232c3856cfa72b904\update_mappings.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-src\src\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\Petar\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-src\src\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-src\src\mappings.h.in">
+    <None Include="C:\Users\Petar\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-src\src\mappings.h.in">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-src\CMake\GenerateMappings.cmake" />
-    <None Include="C:\Users\rafat\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-build\src\CMakeFiles\update_mappings" />
+    <None Include="C:\Users\Petar\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-src\CMake\GenerateMappings.cmake" />
+    <None Include="C:\Users\Petar\source\repos\hackrizen-movie-collection-manager\build\_deps\glfw-build\src\CMakeFiles\update_mappings" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{E312873F-8F26-313D-9912-4A3A5D4A236D}</UniqueIdentifier>
+      <UniqueIdentifier>{B4431292-65A7-3C52-B5DC-C36A2852CC57}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{57CE343C-1C4D-3CC5-A923-10FA56499E10}</UniqueIdentifier>
+      <UniqueIdentifier>{A63A2E6B-095B-3DDC-97B6-2B21EAABDA7E}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

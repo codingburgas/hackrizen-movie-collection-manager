@@ -1,11 +1,11 @@
 {
 	"InstallScripts" : 
 	[
-		"C:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/cmake_install.cmake",
-		"C:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/nlohmann_json-build/cmake_install.cmake",
-		"C:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/ixwebsocket-build/cmake_install.cmake",
-		"C:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-build/cmake_install.cmake",
-		"C:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-build/src/cmake_install.cmake"
+		"C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/build/cmake_install.cmake",
+		"C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/build/_deps/nlohmann_json-build/cmake_install.cmake",
+		"C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/build/_deps/ixwebsocket-build/cmake_install.cmake",
+		"C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-build/cmake_install.cmake",
+		"C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-build/src/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

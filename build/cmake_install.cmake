@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/rafat/source/repos/hackrizen-movie-collection-manager
+# Install script for directory: C:/Users/Petar/source/repos/hackrizen-movie-collection-manager
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,23 +34,23 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/nlohmann_json-build/cmake_install.cmake")
+  include("C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/build/_deps/nlohmann_json-build/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/ixwebsocket-build/cmake_install.cmake")
+  include("C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/build/_deps/ixwebsocket-build/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-build/cmake_install.cmake")
+  include("C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/build/_deps/glfw-build/cmake_install.cmake")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "C:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/install_local_manifest.txt"
+  file(WRITE "C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/build/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
 if(CMAKE_INSTALL_COMPONENT)
@@ -66,6 +66,6 @@ else()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "C:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
