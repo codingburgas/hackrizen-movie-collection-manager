@@ -136,4 +136,83 @@ void applyLightOrange() {
     style.WindowBorderSize  = 1.0f;
 }
 
+void applyDarkTheme() {
+    ImGui::StyleColorsDark();
+
+    ImGuiStyle& style = ImGui::GetStyle();
+    ImVec4* c = style.Colors;
+
+    const ImVec4 bg0        = rgba(0.11f, 0.12f, 0.15f);
+    const ImVec4 bg1        = rgba(0.16f, 0.17f, 0.21f);
+    const ImVec4 bg2        = rgba(0.20f, 0.21f, 0.26f);
+    const ImVec4 bg3        = rgba(0.25f, 0.26f, 0.32f);
+    const ImVec4 border     = rgba(0.30f, 0.31f, 0.40f);
+    const ImVec4 text       = rgba(0.90f, 0.91f, 0.95f);
+    const ImVec4 textDim    = rgba(0.55f, 0.56f, 0.65f);
+
+    const ImVec4 orange     = rgba(1.00f, 0.55f, 0.10f);
+    const ImVec4 orangeHov  = rgba(1.00f, 0.65f, 0.25f);
+    const ImVec4 orangeAct  = rgba(0.85f, 0.40f, 0.05f);
+    const ImVec4 orangeTint = rgba(0.55f, 0.28f, 0.05f, 0.60f);
+
+    c[ImGuiCol_Text]                  = text;
+    c[ImGuiCol_TextDisabled]          = textDim;
+    c[ImGuiCol_WindowBg]              = bg0;
+    c[ImGuiCol_ChildBg]               = bg1;
+    c[ImGuiCol_PopupBg]               = bg1;
+    c[ImGuiCol_MenuBarBg]             = bg1;
+    c[ImGuiCol_Border]                = border;
+    c[ImGuiCol_BorderShadow]          = rgba(0.0f, 0.0f, 0.0f, 0.0f);
+    c[ImGuiCol_FrameBg]               = bg2;
+    c[ImGuiCol_FrameBgHovered]        = bg3;
+    c[ImGuiCol_FrameBgActive]         = rgba(0.30f, 0.31f, 0.40f);
+    c[ImGuiCol_TitleBg]               = bg1;
+    c[ImGuiCol_TitleBgActive]         = bg2;
+    c[ImGuiCol_TitleBgCollapsed]      = bg0;
+    c[ImGuiCol_ScrollbarBg]           = bg0;
+    c[ImGuiCol_ScrollbarGrab]         = bg3;
+    c[ImGuiCol_ScrollbarGrabHovered]  = orangeTint;
+    c[ImGuiCol_ScrollbarGrabActive]   = orange;
+    c[ImGuiCol_CheckMark]             = orange;
+    c[ImGuiCol_SliderGrab]            = orange;
+    c[ImGuiCol_SliderGrabActive]      = orangeAct;
+    c[ImGuiCol_Button]                = orange;
+    c[ImGuiCol_ButtonHovered]         = orangeHov;
+    c[ImGuiCol_ButtonActive]          = orangeAct;
+    c[ImGuiCol_Header]                = bg3;
+    c[ImGuiCol_HeaderHovered]         = orangeTint;
+    c[ImGuiCol_HeaderActive]          = rgba(0.65f, 0.35f, 0.05f, 0.80f);
+    c[ImGuiCol_Separator]             = border;
+    c[ImGuiCol_SeparatorHovered]      = orangeHov;
+    c[ImGuiCol_SeparatorActive]       = orange;
+    c[ImGuiCol_ResizeGrip]            = orangeTint;
+    c[ImGuiCol_ResizeGripHovered]     = orangeHov;
+    c[ImGuiCol_ResizeGripActive]      = orangeAct;
+    c[ImGuiCol_Tab]                   = bg2;
+    c[ImGuiCol_TabHovered]            = orangeHov;
+    c[ImGuiCol_TabActive]             = orange;
+    c[ImGuiCol_TabUnfocused]          = bg1;
+    c[ImGuiCol_TabUnfocusedActive]    = bg2;
+    c[ImGuiCol_TableHeaderBg]         = bg2;
+    c[ImGuiCol_TableBorderStrong]     = border;
+    c[ImGuiCol_TableBorderLight]      = rgba(0.22f, 0.23f, 0.30f);
+    c[ImGuiCol_TableRowBg]            = bg1;
+    c[ImGuiCol_TableRowBgAlt]         = bg0;
+    c[ImGuiCol_TextSelectedBg]        = orangeTint;
+    c[ImGuiCol_NavHighlight]          = orange;
+    c[ImGuiCol_DragDropTarget]        = orangeAct;
+
+    style.WindowRounding    = 6.0f;
+    style.PopupRounding     = 4.0f;
+    style.FrameRounding     = 4.0f;
+    style.GrabRounding      = 4.0f;
+    style.TabRounding       = 4.0f;
+    style.ScrollbarRounding = 4.0f;
+    style.WindowPadding     = ImVec2(10.0f, 10.0f);
+    style.FramePadding      = ImVec2(8.0f, 5.0f);
+    style.ItemSpacing       = ImVec2(8.0f, 6.0f);
+    style.FrameBorderSize   = 1.0f;
+    style.WindowBorderSize  = 1.0f;
+}
+
 } // namespace mcm::presentation::theme

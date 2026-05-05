@@ -34,10 +34,11 @@ std::string toLower(const std::string& input) {
  */
 bool compareLess(const data::Movie& left, const data::Movie& right, SortKey key) {
     switch (key) {
-        case SortKey::TITLE:    return toLower(left.title) < toLower(right.title);
-        case SortKey::YEAR:     return left.year < right.year;
-        case SortKey::RATING:   return left.rating < right.rating;
-        case SortKey::DURATION: return left.durationMinutes < right.durationMinutes;
+        case SortKey::TITLE:      return toLower(left.title) < toLower(right.title);
+        case SortKey::YEAR:       return left.year < right.year;
+        case SortKey::RATING:     return left.rating < right.rating;
+        case SortKey::DURATION:   return left.durationMinutes < right.durationMinutes;
+        case SortKey::DATE_ADDED: return left.dateAdded < right.dateAdded;
     }
     return false;
 }
@@ -244,6 +245,112 @@ std::vector<data::Movie> filterByStatus(
         }
     }
     return result;
+}
+
+std::vector<data::Movie> applyFilters(
+    const std::vector<data::Movie>& movies,
+    const FilterCriteria& criteria) {
+    std::vector<data::Movie> result;
+    result.reserve(movies.size());
+    const std::string loweredNeedle   = toLower(criteria.titleSubstring);
+    const std::string loweredGenre    = toLower(criteria.genreFilter);
+    const std::string loweredDirector = toLower(criteria.directorFilter);
+    for (const data::Movie& movie : movies) {
+        if (criteria.favoritesOnly && !movie.favorite) {
+            continue;
+        }
+        switch (movie.status) {
+            case data::Status::WATCHLIST: if (!criteria.showWatchlist) continue; break;
+            case data::Status::WATCHED:   if (!criteria.showWatched)   continue; break;
+            case data::Status::OWNED:     if (!criteria.showOwned)     continue; break;
+        }
+        if (movie.rating < criteria.minRating || movie.rating > criteria.maxRating) {
+            continue;
+        }
+        if (movie.year < criteria.minYear || movie.year > criteria.maxYear) {
+            continue;
+        }
+        if (!loweredNeedle.empty()) {
+            if (toLower(movie.title).find(loweredNeedle) == std::string::npos) {
+                continue;
+            }
+        }
+        if (!loweredGenre.empty()) {
+            if (toLower(movie.genres).find(loweredGenre) == std::string::npos) {
+                continue;
+            }
+        }
+        if (!loweredDirector.empty()) {
+            if (toLower(movie.director).find(loweredDirector) == std::string::npos) {
+                continue;
+            }
+        }
+        result.push_back(movie);
+    }
+    return result;
+}
+
+StatusCounts countByStatus(const std::vector<data::Movie>& movies) {
+    StatusCounts counts;
+    for (const data::Movie& movie : movies) {
+        switch (movie.status) {
+            case data::Status::WATCHLIST: ++counts.watchlist; break;
+            case data::Status::WATCHED:   ++counts.watched;   break;
+            case data::Status::OWNED:     ++counts.owned;     break;
+        }
+    }
+    return counts;
+}
+
+std::vector<std::pair<std::string, int>> genreStats(
+    const std::vector<data::Movie>& movies) {
+    std::unordered_map<std::string, int> counts;
+    for (const data::Movie& movie : movies) {
+        if (movie.genres.empty()) {
+            continue;
+        }
+        std::istringstream stream(movie.genres);
+        std::string token;
+        while (std::getline(stream, token, ',')) {
+            const std::size_t start = token.find_first_not_of(" \t");
+            const std::size_t end   = token.find_last_not_of(" \t");
+            if (start == std::string::npos) {
+                continue;
+            }
+            std::string trimmed = token.substr(start, end - start + 1);
+            if (trimmed.empty()) {
+                continue;
+            }
+            trimmed[0] = static_cast<char>(
+                std::toupper(static_cast<unsigned char>(trimmed[0])));
+            ++counts[trimmed];
+        }
+    }
+    std::vector<std::pair<std::string, int>> result(counts.begin(), counts.end());
+    std::sort(result.begin(), result.end(),
+              [](const std::pair<std::string, int>& a,
+                 const std::pair<std::string, int>& b) {
+                  return a.second > b.second;
+              });
+    return result;
+}
+
+float highestRating(const std::vector<data::Movie>& movies) {
+    float best = 0.0f;
+    for (const data::Movie& movie : movies) {
+        if (movie.rating > best) {
+            best = movie.rating;
+        }
+    }
+    return best;
+}
+
+long long totalDurationAll(const std::vector<data::Movie>& movies) {
+    long long total = 0;
+    for (const data::Movie& movie : movies) {
+        total += static_cast<long long>(movie.durationMinutes);
+    }
+    return total;
 }
 
 std::vector<data::Movie> snapshotCollection(const data::Collection& collection) {
