@@ -1,3 +1,9 @@
-.vs/ 
-*.ipch 
-*.VC.db 
+.vs/
+*.ipch
+*.VC.db
+
+# CMake build directories — per-machine, never share.
+build/
+build-*/
+out/
+cmake-build-*/

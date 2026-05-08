@@ -1,9 +1,9 @@
 
-if (NOT EXISTS "C:/Users/user/source/repos/hackrizen-movie-collection-manager/out/build/x64-Debug/_deps/glfw-build/install_manifest.txt")
-    message(FATAL_ERROR "Cannot find install manifest: \"C:/Users/user/source/repos/hackrizen-movie-collection-manager/out/build/x64-Debug/_deps/glfw-build/install_manifest.txt\"")
+if (NOT EXISTS "C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/out/build/x64-Debug/_deps/glfw-build/install_manifest.txt")
+    message(FATAL_ERROR "Cannot find install manifest: \"C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/out/build/x64-Debug/_deps/glfw-build/install_manifest.txt\"")
 endif()
 
-file(READ "C:/Users/user/source/repos/hackrizen-movie-collection-manager/out/build/x64-Debug/_deps/glfw-build/install_manifest.txt" files)
+file(READ "C:/Users/Petar/source/repos/hackrizen-movie-collection-manager/out/build/x64-Debug/_deps/glfw-build/install_manifest.txt" files)
 string(REGEX REPLACE "\n" ";" files "${files}")
 
 foreach (file ${files})

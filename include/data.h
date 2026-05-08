@@ -57,6 +57,8 @@ struct Movie {
     std::string director;
     std::string genres;   // comma-separated, e.g. "Action, Drama"
     std::string notes;
+    // v3 fields
+    std::uint64_t dateAdded = 0;  // unix timestamp; set automatically on first add
 };
 
 /**

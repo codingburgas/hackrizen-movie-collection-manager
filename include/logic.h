@@ -26,6 +26,7 @@ enum class SortKey {
     YEAR,
     RATING,
     DURATION,
+    DATE_ADDED,
 };
 
 /**
@@ -110,6 +111,82 @@ bool validateMovie(const data::Movie& movie, std::string& errorMessage);
 std::vector<data::Movie> filterByStatus(
     const std::vector<data::Movie>& movies,
     data::Status status);
+
+/**
+ * FilterCriteria - composite filter used by the GUI. Status flags select
+ * which lifecycle states are visible; favoritesOnly hides non-favorites;
+ * titleSubstring (case-insensitive) further narrows the result.
+ * Advanced fields allow filtering by rating range, year range, genre and director.
+ */
+struct FilterCriteria {
+    bool showWatchlist = true;
+    bool showWatched   = true;
+    bool showOwned     = true;
+    bool favoritesOnly = false;
+    std::string titleSubstring;
+    // Advanced filters
+    float minRating = 0.0f;
+    float maxRating = 10.0f;
+    int   minYear   = 1880;
+    int   maxYear   = 2200;
+    std::string genreFilter;     // case-insensitive substring match in genres
+    std::string directorFilter;  // case-insensitive substring match in director
+};
+
+/**
+ * StatusCounts - per-lifecycle-state movie count.
+ */
+struct StatusCounts {
+    int watchlist = 0;
+    int watched   = 0;
+    int owned     = 0;
+};
+
+/**
+ * applyFilters - returns the subset of `movies` that satisfy `criteria`.
+ * Single linear scan; cheap predicates first.
+ *
+ * @param movies   Source snapshot.
+ * @param criteria Active filter settings.
+ * @return Filtered copy preserving input order.
+ */
+std::vector<data::Movie> applyFilters(
+    const std::vector<data::Movie>& movies,
+    const FilterCriteria& criteria);
+
+/**
+ * countByStatus - tallies movies into the three lifecycle buckets.
+ *
+ * @param movies Collection snapshot.
+ * @return StatusCounts with per-status totals.
+ */
+StatusCounts countByStatus(const std::vector<data::Movie>& movies);
+
+/**
+ * genreStats - parses comma-separated genres across the collection and
+ * returns a list of (genre, count) pairs sorted by count descending.
+ *
+ * @param movies Collection snapshot.
+ * @return Sorted genre frequency list (top genres first).
+ */
+std::vector<std::pair<std::string, int>> genreStats(
+    const std::vector<data::Movie>& movies);
+
+/**
+ * highestRating - returns the maximum rating in the collection (0 if empty).
+ *
+ * @param movies Collection snapshot.
+ * @return Highest rating value.
+ */
+float highestRating(const std::vector<data::Movie>& movies);
+
+/**
+ * totalDurationAll - sums durationMinutes across every movie in the snapshot.
+ *
+ * @param movies Collection snapshot.
+ * @return Total minutes.
+ */
+long long totalDurationAll(const std::vector<data::Movie>& movies);
 
 /**
  * snapshotCollection - convenience wrapper around data::snapshotMovies.

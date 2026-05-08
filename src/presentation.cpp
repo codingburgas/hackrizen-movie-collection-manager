@@ -4,19 +4,25 @@
  * Uses GLFW + OpenGL3 backend. All ImGui interaction is expressed with
  * free functions operating on the UiState struct; no classes defined.
  */
-// Must come before any header that pulls in windows.h
 #if defined(_WIN32)
-#  define NOMINMAX
-#  define WIN32_LEAN_AND_MEAN
+#  ifndef NOMINMAX
+#    define NOMINMAX
+#  endif
+#  ifndef WIN32_LEAN_AND_MEAN
+#    define WIN32_LEAN_AND_MEAN
+#  endif
 #endif
 
 #include "presentation.h"
 #include "theme.h"
 
 #include <algorithm>
+#include <chrono>
 #include <cstdio>
 #include <cstring>
+#include <fstream>
 #include <iostream>
+#include <sstream>
 
 #include <GLFW/glfw3.h>
 
@@ -28,31 +34,17 @@ namespace mcm::presentation {
 
 namespace {
 
-/**
- * WINDOW_WIDTH / WINDOW_HEIGHT - initial window size constants.
- */
-constexpr int WINDOW_WIDTH = 1280;
-constexpr int WINDOW_HEIGHT = 800;
+constexpr int WINDOW_WIDTH  = 1400;
+constexpr int WINDOW_HEIGHT = 860;
 
-/**
- * windowHandle - GLFW window kept at file scope (inside an anonymous
- * namespace) solely because GLFW exposes C-style callbacks. It is NOT
- * mutable state the application logic relies on.
- */
 GLFWwindow* windowHandle = nullptr;
 
-/**
- * copyString - safe strncpy to fixed-size UI buffers. Internal.
- */
-void copyString(char* destination, std::size_t capacity, const std::string& source) {
-    const std::size_t length = std::min(source.size(), capacity - 1);
-    std::memcpy(destination, source.data(), length);
-    destination[length] = '\0';
+void copyString(char* dst, std::size_t cap, const std::string& src) {
+    const std::size_t len = std::min(src.size(), cap - 1);
+    std::memcpy(dst, src.data(), len);
+    dst[len] = '\0';
 }
 
-/**
- * makeMovieFromForm - reads the form fields into a Movie struct. Internal.
- */
 data::Movie makeMovieFromForm(const UiState& state) {
     data::Movie movie;
     movie.id              = state.editingId;
@@ -68,9 +60,6 @@ data::Movie makeMovieFromForm(const UiState& state) {
     return movie;
 }
 
-/**
- * resetForm - clears the form inputs. Internal.
- */
 void resetForm(UiState& state) {
     state.formTitle[0]    = '\0';
     state.formDirector[0] = '\0';
@@ -84,41 +73,108 @@ void resetForm(UiState& state) {
     state.editingId    = 0;
 }
 
-/**
- * sendRequest - encodes and pushes a Message to the server. Internal.
- */
 bool sendRequest(network::Client& client, const protocol::Message& message) {
     return network::sendClientMessage(client, protocol::encodeMessage(message));
 }
 
-/**
- * refreshTotalDuration - recomputes the recursive selection total. Internal.
- */
 void refreshTotalDuration(UiState& state) {
     const std::vector<data::Movie> snapshot = logic::snapshotCollection(state.localCollection);
     std::vector<std::uint64_t> selected(state.selectedIds.begin(), state.selectedIds.end());
     state.totalSelectedMinutes = logic::totalDurationRecursive(snapshot, selected, 0);
 }
 
-/**
- * renderConnectionBar - draws the host/port controls. Internal.
- */
+// Returns the color used to tint rows/badges for a given status.
+ImU32 statusRowColor(data::Status status, bool dark) {
+    if (dark) {
+        switch (status) {
+            case data::Status::WATCHLIST: return IM_COL32(180, 130, 20,  55);
+            case data::Status::WATCHED:   return IM_COL32(30,  100, 200, 55);
+            case data::Status::OWNED:     return IM_COL32(30,  160, 70,  55);
+        }
+    } else {
+        switch (status) {
+            case data::Status::WATCHLIST: return IM_COL32(255, 235, 140, 70);
+            case data::Status::WATCHED:   return IM_COL32(160, 210, 255, 70);
+            case data::Status::OWNED:     return IM_COL32(160, 240, 170, 70);
+        }
+    }
+    return IM_COL32(200, 200, 200, 40);
+}
+
+ImVec4 statusTextColor(data::Status status) {
+    switch (status) {
+        case data::Status::WATCHLIST: return ImVec4(0.85f, 0.60f, 0.05f, 1.0f);
+        case data::Status::WATCHED:   return ImVec4(0.25f, 0.55f, 0.95f, 1.0f);
+        case data::Status::OWNED:     return ImVec4(0.15f, 0.72f, 0.30f, 1.0f);
+    }
+    return ImVec4(1, 1, 1, 1);
+}
+
+// Export the current filtered+sorted snapshot to a CSV file.
+void exportToCsv(const UiState& state) {
+    const std::vector<data::Movie> snapshot = logic::snapshotCollection(state.localCollection);
+
+    logic::FilterCriteria criteria;
+    criteria.showWatchlist  = state.showWatchlist;
+    criteria.showWatched    = state.showWatched;
+    criteria.showOwned      = state.showOwned;
+    criteria.favoritesOnly  = state.favoritesOnly;
+    criteria.titleSubstring = state.searchBuffer;
+    criteria.genreFilter    = state.genreFilter;
+    criteria.directorFilter = state.directorFilter;
+    criteria.minRating      = state.minRatingFilter;
+    criteria.maxRating      = state.maxRatingFilter;
+    criteria.minYear        = state.minYearFilter;
+    criteria.maxYear        = state.maxYearFilter;
+
+    std::vector<data::Movie> movies = logic::applyFilters(snapshot, criteria);
+    logic::sortMovies(movies, state.sortKey, state.sortOrder);
+
+    static const char* STATUS_LABELS[] = {"Watchlist", "Watched", "Owned"};
+
+    std::ofstream file("movie_collection_export.csv");
+    file << "ID,Title,Director,Genres,Year,Rating,Duration (min),Status,Favorite,Notes\n";
+    for (const auto& m : movies) {
+        const int si = static_cast<int>(m.status);
+        file << m.id << ","
+             << "\"" << m.title    << "\","
+             << "\"" << m.director << "\","
+             << "\"" << m.genres   << "\","
+             << m.year << ","
+             << m.rating << ","
+             << m.durationMinutes << ","
+             << STATUS_LABELS[si >= 0 && si <= 2 ? si : 0] << ","
+             << (m.favorite ? "Yes" : "No") << ","
+             << "\"" << m.notes << "\"\n";
+    }
+}
+
+// ──────────────────────────────────────────────────────────────────────────────
+//  Connection bar
+// ──────────────────────────────────────────────────────────────────────────────
 void renderConnectionBar(UiState& state, network::Client& client) {
+    const bool online = client.connected.load();
+
     ImGui::Text("Server:");
     ImGui::SameLine();
     ImGui::SetNextItemWidth(150.0f);
     ImGui::InputText("##host", state.hostBuffer, sizeof(state.hostBuffer));
     ImGui::SameLine();
-    ImGui::SetNextItemWidth(80.0f);
+    ImGui::SetNextItemWidth(70.0f);
     ImGui::InputText("##port", state.portBuffer, sizeof(state.portBuffer));
     ImGui::SameLine();
-    if (client.connected.load()) {
+
+    if (online) {
+        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.70f, 0.15f, 0.10f, 1.0f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.85f, 0.20f, 0.15f, 1.0f));
         if (ImGui::Button("Disconnect")) {
             network::disconnectClient(client);
             state.statusMessage = "Disconnected.";
         }
+        ImGui::PopStyleColor(2);
     } else {
         if (ImGui::Button("Connect")) {
+            state.lastReconnectAttemptTime = glfwGetTime();
             if (network::connectClient(client, state.hostBuffer, state.portBuffer)) {
                 state.statusMessage = "Connected.";
                 protocol::Message sync;
@@ -130,72 +186,316 @@ void renderConnectionBar(UiState& state, network::Client& client) {
         }
     }
     ImGui::SameLine();
-    ImGui::TextDisabled("%s", client.connected.load() ? "ONLINE" : "OFFLINE");
+
+    if (online) {
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.15f, 0.80f, 0.30f, 1.0f));
+        ImGui::Text("  ONLINE");
+        ImGui::PopStyleColor();
+    } else {
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.85f, 0.25f, 0.20f, 1.0f));
+        ImGui::Text("  OFFLINE");
+        ImGui::PopStyleColor();
+    }
+
+    ImGui::SameLine();
+    ImGui::Checkbox("Auto-reconnect", &state.autoReconnect);
+
+    if (!online && state.autoReconnect) {
+        const double now  = glfwGetTime();
+        const double wait = 5.0 - (now - state.lastReconnectAttemptTime);
+        if (wait > 0.0) {
+            ImGui::SameLine();
+            ImGui::TextDisabled("(retry in %.0fs)", wait);
+        }
+    }
 }
 
-/**
- * renderToolbar - search control and sync button. Internal.
- * Column-header clicks drive sorting via ImGuiTableFlags_Sortable.
- */
+// ──────────────────────────────────────────────────────────────────────────────
+//  Toolbar
+// ──────────────────────────────────────────────────────────────────────────────
 void renderToolbar(UiState& state, network::Client& client) {
-    ImGui::SetNextItemWidth(300.0f);
-    ImGui::InputTextWithHint("##search", "Search title (substring)",
+    const std::vector<data::Movie> snap = logic::snapshotCollection(state.localCollection);
+    const logic::StatusCounts      counts = logic::countByStatus(snap);
+
+    // Row 1: status filter checkboxes with live counts.
+    char wlLabel[32], wdLabel[32], ownLabel[32];
+    std::snprintf(wlLabel,  sizeof(wlLabel),  "Watchlist (%d)", counts.watchlist);
+    std::snprintf(wdLabel,  sizeof(wdLabel),  "Watched (%d)",   counts.watched);
+    std::snprintf(ownLabel, sizeof(ownLabel), "Owned (%d)",     counts.owned);
+
+    ImGui::PushStyleColor(ImGuiCol_Text, statusTextColor(data::Status::WATCHLIST));
+    ImGui::Checkbox(wlLabel, &state.showWatchlist);
+    ImGui::PopStyleColor();
+    ImGui::SameLine();
+    ImGui::PushStyleColor(ImGuiCol_Text, statusTextColor(data::Status::WATCHED));
+    ImGui::Checkbox(wdLabel, &state.showWatched);
+    ImGui::PopStyleColor();
+    ImGui::SameLine();
+    ImGui::PushStyleColor(ImGuiCol_Text, statusTextColor(data::Status::OWNED));
+    ImGui::Checkbox(ownLabel, &state.showOwned);
+    ImGui::PopStyleColor();
+    ImGui::SameLine();
+    ImGui::TextDisabled("|");
+    ImGui::SameLine();
+    ImGui::Checkbox("Favorites only", &state.favoritesOnly);
+
+    // Row 2: search + actions.
+    ImGui::SetNextItemWidth(240.0f);
+    ImGui::InputTextWithHint("##search", "Search title...",
                              state.searchBuffer, sizeof(state.searchBuffer));
     ImGui::SameLine();
-    if (ImGui::Button("Clear")) {
+    if (ImGui::SmallButton("X##clrsearch")) {
         state.searchBuffer[0] = '\0';
     }
     ImGui::SameLine();
-    if (ImGui::Button("Request Full Sync") && client.connected.load()) {
+    ImGui::TextDisabled("|");
+    ImGui::SameLine();
+    if (ImGui::SmallButton("Advanced Filters")) {
+        state.showAdvancedFilters = !state.showAdvancedFilters;
+    }
+    ImGui::SameLine();
+    if (ImGui::SmallButton("Statistics")) {
+        state.showStatsPanel = !state.showStatsPanel;
+    }
+    ImGui::SameLine();
+    if (ImGui::SmallButton("Export CSV")) {
+        exportToCsv(state);
+        state.statusMessage = "Exported to movie_collection_export.csv";
+    }
+    ImGui::SameLine();
+    if (ImGui::SmallButton("Sync") && client.connected.load()) {
         protocol::Message sync;
         sync.kind = protocol::MessageKind::REQUEST_SYNC;
         sendRequest(client, sync);
     }
+    ImGui::SameLine();
+    ImGui::TextDisabled("|");
+    ImGui::SameLine();
+    // Dark mode toggle.
+    if (ImGui::SmallButton(state.darkMode ? "Light Mode" : "Dark Mode")) {
+        state.darkMode = !state.darkMode;
+        if (state.darkMode) {
+            theme::applyDarkTheme();
+        } else {
+            theme::applyLightOrange();
+        }
+    }
+
+    // Row 3: selection controls.
+    if (ImGui::SmallButton("Select All")) {
+        const auto all = logic::snapshotCollection(state.localCollection);
+        logic::FilterCriteria fc;
+        fc.showWatchlist  = state.showWatchlist;
+        fc.showWatched    = state.showWatched;
+        fc.showOwned      = state.showOwned;
+        fc.favoritesOnly  = state.favoritesOnly;
+        fc.titleSubstring = state.searchBuffer;
+        fc.genreFilter    = state.genreFilter;
+        fc.directorFilter = state.directorFilter;
+        fc.minRating      = state.minRatingFilter;
+        fc.maxRating      = state.maxRatingFilter;
+        fc.minYear        = state.minYearFilter;
+        fc.maxYear        = state.maxYearFilter;
+        for (const auto& m : logic::applyFilters(all, fc)) {
+            state.selectedIds.insert(m.id);
+        }
+        refreshTotalDuration(state);
+    }
+    ImGui::SameLine();
+    if (ImGui::SmallButton("Deselect All")) {
+        state.selectedIds.clear();
+        state.totalSelectedMinutes = 0;
+    }
+    if (!state.selectedIds.empty()) {
+        ImGui::SameLine();
+        char bulkLabel[48];
+        std::snprintf(bulkLabel, sizeof(bulkLabel),
+                      "Delete Selected (%zu)", state.selectedIds.size());
+        ImGui::PushStyleColor(ImGuiCol_Button,        ImVec4(0.75f, 0.12f, 0.10f, 1.0f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.90f, 0.18f, 0.15f, 1.0f));
+        if (ImGui::SmallButton(bulkLabel)) {
+            if (client.connected.load()) {
+                for (const std::uint64_t id : state.selectedIds) {
+                    protocol::Message req;
+                    req.kind     = protocol::MessageKind::REQUEST_REMOVE;
+                    req.targetId = id;
+                    sendRequest(client, req);
+                }
+                state.statusMessage = "Bulk delete requested.";
+                if (state.selectedIds.count(state.editingId)) {
+                    resetForm(state);
+                }
+                state.selectedIds.clear();
+                state.totalSelectedMinutes = 0;
+            }
+        }
+        ImGui::PopStyleColor(2);
+    }
+
+    // Keyboard shortcut hints.
+    ImGui::SameLine();
+    ImGui::TextDisabled("  Ctrl+N: New  Ctrl+A: Sel-All  Ctrl+E: Export  Esc: Cancel");
 }
 
-/**
- * renderMovieTable - displays the sorted / filtered movies. Internal.
- */
-void renderMovieTable(UiState& state) {
-    std::vector<data::Movie> movies = logic::snapshotCollection(state.localCollection);
-    logic::sortMovies(movies, state.sortKey, state.sortOrder);
-
-    std::vector<std::size_t> visibleIndices;
-    const std::string needle = state.searchBuffer;
-    if (needle.empty()) {
-        visibleIndices.reserve(movies.size());
-        for (std::size_t index = 0; index < movies.size(); ++index) {
-            visibleIndices.push_back(index);
-        }
-    } else {
-        visibleIndices = logic::linearSearchByTitle(movies, needle);
+// ──────────────────────────────────────────────────────────────────────────────
+//  Advanced filters (collapsible panel)
+// ──────────────────────────────────────────────────────────────────────────────
+void renderAdvancedFilters(UiState& state) {
+    if (!state.showAdvancedFilters) {
+        return;
     }
+    ImGui::PushStyleColor(ImGuiCol_ChildBg, ImGui::GetStyleColorVec4(ImGuiCol_FrameBg));
+    if (ImGui::BeginChild("##advfilters", ImVec2(0.0f, 90.0f), true)) {
+        ImGui::TextDisabled("Advanced Filters");
+        ImGui::SameLine();
+        if (ImGui::SmallButton("Reset Filters")) {
+            state.genreFilter[0]    = '\0';
+            state.directorFilter[0] = '\0';
+            state.minRatingFilter   = 0.0f;
+            state.maxRatingFilter   = 10.0f;
+            state.minYearFilter     = 1880;
+            state.maxYearFilter     = 2200;
+        }
+
+        ImGui::SetNextItemWidth(180.0f);
+        ImGui::InputTextWithHint("##genre", "Genre filter...",
+                                 state.genreFilter, sizeof(state.genreFilter));
+        ImGui::SameLine();
+        ImGui::SetNextItemWidth(180.0f);
+        ImGui::InputTextWithHint("##director", "Director filter...",
+                                 state.directorFilter, sizeof(state.directorFilter));
+        ImGui::SameLine();
+        ImGui::SetNextItemWidth(100.0f);
+        ImGui::DragFloatRange2("Rating", &state.minRatingFilter, &state.maxRatingFilter,
+                               0.1f, 0.0f, 10.0f, "%.1f", "%.1f");
+        ImGui::SameLine();
+        ImGui::SetNextItemWidth(120.0f);
+        ImGui::DragIntRange2("Year", &state.minYearFilter, &state.maxYearFilter,
+                             1.0f, 1880, 2200);
+    }
+    ImGui::EndChild();
+    ImGui::PopStyleColor();
+}
+
+// ──────────────────────────────────────────────────────────────────────────────
+//  Statistics panel
+// ──────────────────────────────────────────────────────────────────────────────
+void renderStatsPanel(const UiState& state) {
+    if (!state.showStatsPanel) {
+        return;
+    }
+    const std::vector<data::Movie> snap   = logic::snapshotCollection(state.localCollection);
+    const logic::StatusCounts      counts = logic::countByStatus(snap);
+    const float                    avg    = logic::averageRating(snap);
+    const float                    best   = logic::highestRating(snap);
+    const long long                total  = logic::totalDurationAll(snap);
+    const auto                     genres = logic::genreStats(snap);
+    const int                      total3 = counts.watchlist + counts.watched + counts.owned;
+
+    ImGui::PushStyleColor(ImGuiCol_ChildBg, ImGui::GetStyleColorVec4(ImGuiCol_FrameBg));
+    if (ImGui::BeginChild("##stats", ImVec2(0.0f, 110.0f), true)) {
+        ImGui::TextDisabled("Collection Statistics");
+        ImGui::Separator();
+
+        // Status distribution bars.
+        const float barMaxWidth = 160.0f;
+        ImGui::Text("Total: %d", total3);
+        ImGui::SameLine(90.0f);
+
+        const float wlFrac  = total3 > 0 ? static_cast<float>(counts.watchlist) / total3 : 0.0f;
+        const float wdFrac  = total3 > 0 ? static_cast<float>(counts.watched)   / total3 : 0.0f;
+        const float ownFrac = total3 > 0 ? static_cast<float>(counts.owned)     / total3 : 0.0f;
+
+        ImGui::PushStyleColor(ImGuiCol_PlotHistogram, statusTextColor(data::Status::WATCHLIST));
+        char wlBuf[24]; std::snprintf(wlBuf, sizeof(wlBuf), "WL %d", counts.watchlist);
+        ImGui::ProgressBar(wlFrac, ImVec2(barMaxWidth, 14.0f), wlBuf);
+        ImGui::PopStyleColor();
+        ImGui::SameLine();
+        ImGui::PushStyleColor(ImGuiCol_PlotHistogram, statusTextColor(data::Status::WATCHED));
+        char wdBuf[24]; std::snprintf(wdBuf, sizeof(wdBuf), "Seen %d", counts.watched);
+        ImGui::ProgressBar(wdFrac, ImVec2(barMaxWidth, 14.0f), wdBuf);
+        ImGui::PopStyleColor();
+        ImGui::SameLine();
+        ImGui::PushStyleColor(ImGuiCol_PlotHistogram, statusTextColor(data::Status::OWNED));
+        char ownBuf[24]; std::snprintf(ownBuf, sizeof(ownBuf), "Own %d", counts.owned);
+        ImGui::ProgressBar(ownFrac, ImVec2(barMaxWidth, 14.0f), ownBuf);
+        ImGui::PopStyleColor();
+
+        // Rating + duration summary.
+        const long long hours = total / 60;
+        const long long mins  = total % 60;
+        ImGui::Text("Avg rating: %.2f  |  Best: %.1f  |  Total watch time: %lldh %02lldm",
+                    static_cast<double>(avg),
+                    static_cast<double>(best),
+                    hours, mins);
+
+        // Top genres.
+        if (!genres.empty()) {
+            ImGui::TextDisabled("Top genres:");
+            ImGui::SameLine();
+            constexpr std::size_t MAX_SHOWN = 8;
+            for (std::size_t i = 0; i < genres.size() && i < MAX_SHOWN; ++i) {
+                if (i > 0) {
+                    ImGui::SameLine();
+                    ImGui::TextDisabled(" |");
+                    ImGui::SameLine();
+                }
+                ImGui::Text("%s(%d)", genres[i].first.c_str(), genres[i].second);
+            }
+        }
+    }
+    ImGui::EndChild();
+    ImGui::PopStyleColor();
+}
+
+// ──────────────────────────────────────────────────────────────────────────────
+//  Movie table
+// ──────────────────────────────────────────────────────────────────────────────
+void renderMovieTable(UiState& state) {
+    std::vector<data::Movie> snapshot = logic::snapshotCollection(state.localCollection);
+
+    logic::FilterCriteria criteria;
+    criteria.showWatchlist  = state.showWatchlist;
+    criteria.showWatched    = state.showWatched;
+    criteria.showOwned      = state.showOwned;
+    criteria.favoritesOnly  = state.favoritesOnly;
+    criteria.titleSubstring = state.searchBuffer;
+    criteria.genreFilter    = state.genreFilter;
+    criteria.directorFilter = state.directorFilter;
+    criteria.minRating      = state.minRatingFilter;
+    criteria.maxRating      = state.maxRatingFilter;
+    criteria.minYear        = state.minYearFilter;
+    criteria.maxYear        = state.maxYearFilter;
+
+    std::vector<data::Movie> movies = logic::applyFilters(snapshot, criteria);
+    logic::sortMovies(movies, state.sortKey, state.sortOrder);
 
     const ImGuiTableFlags tableFlags = ImGuiTableFlags_Borders
                                      | ImGuiTableFlags_RowBg
                                      | ImGuiTableFlags_Resizable
                                      | ImGuiTableFlags_ScrollY
                                      | ImGuiTableFlags_Sortable;
-    if (ImGui::BeginTable("movies", 9, tableFlags, ImVec2(0.0f, 360.0f))) {
+
+    if (ImGui::BeginTable("movies", 10, tableFlags, ImVec2(0.0f, 0.0f))) {
         ImGui::TableSetupScrollFreeze(0, 1);
-        // Columns 0-2 (Sel, Fav, Id) and 8 (Actions) are not sortable.
         ImGui::TableSetupColumn("Sel",      ImGuiTableColumnFlags_NoSort | ImGuiTableColumnFlags_WidthFixed, 24.0f);
-        ImGui::TableSetupColumn("Fav",      ImGuiTableColumnFlags_NoSort | ImGuiTableColumnFlags_WidthFixed, 24.0f);
-        ImGui::TableSetupColumn("Id",       ImGuiTableColumnFlags_NoSort | ImGuiTableColumnFlags_WidthFixed, 40.0f);
-        ImGui::TableSetupColumn("Title",    ImGuiTableColumnFlags_DefaultSort);
-        ImGui::TableSetupColumn("Status",   ImGuiTableColumnFlags_NoSort | ImGuiTableColumnFlags_WidthFixed, 80.0f);
+        ImGui::TableSetupColumn("Fav",      ImGuiTableColumnFlags_NoSort | ImGuiTableColumnFlags_WidthFixed, 22.0f);
+        ImGui::TableSetupColumn("Title",    ImGuiTableColumnFlags_DefaultSort | ImGuiTableColumnFlags_WidthStretch);
+        ImGui::TableSetupColumn("Director", ImGuiTableColumnFlags_NoSort | ImGuiTableColumnFlags_WidthStretch);
+        ImGui::TableSetupColumn("Genres",   ImGuiTableColumnFlags_NoSort | ImGuiTableColumnFlags_WidthStretch);
         ImGui::TableSetupColumn("Year",     ImGuiTableColumnFlags_WidthFixed, 48.0f);
-        ImGui::TableSetupColumn("Rating",   ImGuiTableColumnFlags_WidthFixed, 52.0f);
+        ImGui::TableSetupColumn("Rating",   ImGuiTableColumnFlags_WidthFixed, 90.0f);
         ImGui::TableSetupColumn("Duration", ImGuiTableColumnFlags_WidthFixed, 70.0f);
+        ImGui::TableSetupColumn("Status",   ImGuiTableColumnFlags_NoSort | ImGuiTableColumnFlags_WidthFixed, 76.0f);
         ImGui::TableSetupColumn("Actions",  ImGuiTableColumnFlags_NoSort | ImGuiTableColumnFlags_WidthFixed, 80.0f);
         ImGui::TableHeadersRow();
 
-        // Map column index → SortKey (only columns 3,5,6,7 are sortable).
+        // Handle column sort specs.
         if (ImGuiTableSortSpecs* specs = ImGui::TableGetSortSpecs()) {
             if (specs->SpecsDirty && specs->SpecsCount > 0) {
                 const ImGuiTableColumnSortSpecs& s = specs->Specs[0];
                 switch (s.ColumnIndex) {
-                    case 3: state.sortKey = logic::SortKey::TITLE;    break;
+                    case 2: state.sortKey = logic::SortKey::TITLE;    break;
                     case 5: state.sortKey = logic::SortKey::YEAR;     break;
                     case 6: state.sortKey = logic::SortKey::RATING;   break;
                     case 7: state.sortKey = logic::SortKey::DURATION; break;
@@ -208,13 +508,19 @@ void renderMovieTable(UiState& state) {
             }
         }
 
-        for (std::size_t visibleCursor = 0; visibleCursor < visibleIndices.size(); ++visibleCursor) {
-            const data::Movie& movie = movies[visibleIndices[visibleCursor]];
+        for (const data::Movie& movie : movies) {
             ImGui::TableNextRow();
 
+            // Color-code the row by status.
+            const ImU32 rowBg = statusRowColor(movie.status, state.darkMode);
+            ImGui::TableSetBgColor(ImGuiTableBgTarget_RowBg0, rowBg);
+            ImGui::TableSetBgColor(ImGuiTableBgTarget_RowBg1, rowBg);
+
+            ImGui::PushID(static_cast<int>(movie.id));
+
+            // Col 0: selection checkbox.
             ImGui::TableSetColumnIndex(0);
             bool selected = state.selectedIds.count(movie.id) > 0;
-            ImGui::PushID(static_cast<int>(movie.id));
             if (ImGui::Checkbox("##sel", &selected)) {
                 if (selected) {
                     state.selectedIds.insert(movie.id);
@@ -223,26 +529,73 @@ void renderMovieTable(UiState& state) {
                 }
                 refreshTotalDuration(state);
             }
+
+            // Col 1: favorite heart.
             ImGui::TableSetColumnIndex(1);
-            ImGui::TextUnformatted(movie.favorite ? "*" : " ");
-            ImGui::TableSetColumnIndex(2);
-            ImGui::Text("%llu", static_cast<unsigned long long>(movie.id));
-            ImGui::TableSetColumnIndex(3);
-            ImGui::TextUnformatted(movie.title.c_str());
-            ImGui::TableSetColumnIndex(4);
-            {
-                static const char* STATUS_LABELS[] = {"Watch", "Seen", "Own"};
-                const int si = static_cast<int>(movie.status);
-                ImGui::TextUnformatted(STATUS_LABELS[si >= 0 && si <= 2 ? si : 0]);
+            if (movie.favorite) {
+                ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.95f, 0.25f, 0.30f, 1.0f));
+                ImGui::TextUnformatted("<3");
+                ImGui::PopStyleColor();
             }
+
+            // Col 2: title with tooltip showing notes.
+            ImGui::TableSetColumnIndex(2);
+            ImGui::TextUnformatted(movie.title.c_str());
+            if (!movie.notes.empty() && ImGui::IsItemHovered()) {
+                ImGui::BeginTooltip();
+                ImGui::TextDisabled("Notes:");
+                ImGui::TextWrapped("%s", movie.notes.c_str());
+                ImGui::EndTooltip();
+            }
+
+            // Col 3: director.
+            ImGui::TableSetColumnIndex(3);
+            ImGui::TextUnformatted(movie.director.c_str());
+
+            // Col 4: genres.
+            ImGui::TableSetColumnIndex(4);
+            ImGui::TextUnformatted(movie.genres.c_str());
+
+            // Col 5: year.
             ImGui::TableSetColumnIndex(5);
             ImGui::Text("%d", movie.year);
-            ImGui::TableSetColumnIndex(6);
-            ImGui::Text("%.1f", movie.rating);
-            ImGui::TableSetColumnIndex(7);
-            ImGui::Text("%d min", movie.durationMinutes);
 
+            // Col 6: rating progress bar.
+            ImGui::TableSetColumnIndex(6);
+            {
+                ImVec4 barColor;
+                if (movie.rating >= 7.5f)      barColor = ImVec4(0.18f, 0.75f, 0.30f, 1.0f);
+                else if (movie.rating >= 5.0f) barColor = ImVec4(0.95f, 0.70f, 0.05f, 1.0f);
+                else                           barColor = ImVec4(0.90f, 0.25f, 0.18f, 1.0f);
+
+                char ratingBuf[16];
+                std::snprintf(ratingBuf, sizeof(ratingBuf), "%.1f", movie.rating);
+                ImGui::PushStyleColor(ImGuiCol_PlotHistogram, barColor);
+                ImGui::ProgressBar(movie.rating / 10.0f, ImVec2(-1.0f, 0.0f), ratingBuf);
+                ImGui::PopStyleColor();
+            }
+
+            // Col 7: duration.
+            ImGui::TableSetColumnIndex(7);
+            if (movie.durationMinutes >= 60) {
+                ImGui::Text("%dh%02dm", movie.durationMinutes / 60, movie.durationMinutes % 60);
+            } else {
+                ImGui::Text("%dmin", movie.durationMinutes);
+            }
+
+            // Col 8: status badge.
             ImGui::TableSetColumnIndex(8);
+            {
+                static const char* STATUS_LABELS[] = {"Watchlist", "Watched", "Owned"};
+                const int si = static_cast<int>(movie.status);
+                const int si_clamped = (si >= 0 && si <= 2) ? si : 0;
+                ImGui::PushStyleColor(ImGuiCol_Text, statusTextColor(movie.status));
+                ImGui::TextUnformatted(STATUS_LABELS[si_clamped]);
+                ImGui::PopStyleColor();
+            }
+
+            // Col 9: actions.
+            ImGui::TableSetColumnIndex(9);
             if (ImGui::SmallButton("Edit")) {
                 state.editingId = movie.id;
                 copyString(state.formTitle,    sizeof(state.formTitle),    movie.title);
@@ -256,28 +609,32 @@ void renderMovieTable(UiState& state) {
                 state.formFavorite = movie.favorite;
             }
             ImGui::SameLine();
+            ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.85f, 0.25f, 0.20f, 1.0f));
             if (ImGui::SmallButton("Del")) {
                 state.pendingDeleteId = movie.id;
             }
+            ImGui::PopStyleColor();
+
             ImGui::PopID();
         }
         ImGui::EndTable();
     }
 }
 
-/**
- * renderDeleteModal - confirmation popup for destructive deletes. Internal.
- */
+// ──────────────────────────────────────────────────────────────────────────────
+//  Delete confirmation modal
+// ──────────────────────────────────────────────────────────────────────────────
 void renderDeleteModal(UiState& state, network::Client& client) {
-    // Centre the popup on first use.
     ImGui::SetNextWindowPos(ImGui::GetMainViewport()->GetCenter(),
                             ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
     if (ImGui::BeginPopupModal("Confirm Delete", nullptr,
                                ImGuiWindowFlags_AlwaysAutoResize)) {
         ImGui::Text("Delete movie id %llu?",
                     static_cast<unsigned long long>(state.pendingDeleteId));
-        ImGui::Text("This cannot be undone.");
+        ImGui::TextDisabled("This cannot be undone.");
         ImGui::Separator();
+        ImGui::PushStyleColor(ImGuiCol_Button,        ImVec4(0.75f, 0.12f, 0.10f, 1.0f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.90f, 0.18f, 0.15f, 1.0f));
         if (ImGui::Button("Delete", ImVec2(100, 0))) {
             protocol::Message request;
             request.kind     = protocol::MessageKind::REQUEST_REMOVE;
@@ -292,6 +649,7 @@ void renderDeleteModal(UiState& state, network::Client& client) {
             state.pendingDeleteId = 0;
             ImGui::CloseCurrentPopup();
         }
+        ImGui::PopStyleColor(2);
         ImGui::SameLine();
         if (ImGui::Button("Cancel", ImVec2(100, 0))) {
             state.pendingDeleteId = 0;
@@ -301,36 +659,72 @@ void renderDeleteModal(UiState& state, network::Client& client) {
     }
 }
 
-/**
- * renderForm - create/update form. Internal.
- */
+// ──────────────────────────────────────────────────────────────────────────────
+//  Movie create / edit form (right panel)
+// ──────────────────────────────────────────────────────────────────────────────
 void renderForm(UiState& state, network::Client& client) {
-    ImGui::SeparatorText(state.editingId == 0 ? "Add Movie" : "Edit Movie");
+    if (state.editingId == 0) {
+        ImGui::SeparatorText("Add New Movie");
+    } else {
+        char header[280];
+        std::snprintf(header, sizeof(header), "Edit: %s", state.formTitle);
+        ImGui::SeparatorText(header);
+    }
 
-    ImGui::InputText("Title",    state.formTitle,    sizeof(state.formTitle));
-    ImGui::InputText("Director", state.formDirector, sizeof(state.formDirector));
-    ImGui::InputText("Genres (comma-separated)", state.formGenres, sizeof(state.formGenres));
-    ImGui::InputInt("Year", &state.formYear);
-    ImGui::SliderFloat("Rating", &state.formRating, 0.0f, 10.0f, "%.1f");
-    ImGui::InputInt("Duration (min)", &state.formDuration);
+    const float fieldW = ImGui::GetContentRegionAvail().x;
+
+    if (state.focusTitleNextFrame) {
+        ImGui::SetKeyboardFocusHere();
+        state.focusTitleNextFrame = false;
+    }
+    ImGui::SetNextItemWidth(fieldW);
+    ImGui::InputTextWithHint("##title", "Title *", state.formTitle, sizeof(state.formTitle));
+
+    ImGui::SetNextItemWidth(fieldW);
+    ImGui::InputTextWithHint("##director", "Director", state.formDirector, sizeof(state.formDirector));
+
+    ImGui::SetNextItemWidth(fieldW);
+    ImGui::InputTextWithHint("##genres", "Genres (comma-separated)", state.formGenres, sizeof(state.formGenres));
+
+    // Year and Rating side by side.
+    ImGui::SetNextItemWidth((fieldW - 8.0f) * 0.40f);
+    ImGui::InputInt("##year", &state.formYear);
+    ImGui::SameLine();
+    ImGui::SetNextItemWidth((fieldW - 8.0f) * 0.60f);
+    ImGui::SliderFloat("##rating", &state.formRating, 0.0f, 10.0f, "Rating: %.1f");
+
+    // Duration and Status side by side.
+    ImGui::SetNextItemWidth((fieldW - 8.0f) * 0.40f);
+    ImGui::InputInt("##dur", &state.formDuration);
+    if (ImGui::IsItemHovered()) {
+        ImGui::BeginTooltip();
+        ImGui::TextUnformatted("Duration in minutes");
+        ImGui::EndTooltip();
+    }
+    ImGui::SameLine();
     {
         static const char* STATUS_LABELS[] = {"Watchlist", "Watched", "Owned"};
-        ImGui::Combo("Status", &state.formStatus, STATUS_LABELS, IM_ARRAYSIZE(STATUS_LABELS));
+        ImGui::SetNextItemWidth((fieldW - 8.0f) * 0.60f);
+        ImGui::Combo("##status", &state.formStatus, STATUS_LABELS, IM_ARRAYSIZE(STATUS_LABELS));
     }
+
     ImGui::Checkbox("Favorite", &state.formFavorite);
-    ImGui::InputTextMultiline("Notes", state.formNotes, sizeof(state.formNotes),
-                              ImVec2(-1.0f, 60.0f));
+
+    ImGui::SetNextItemWidth(fieldW);
+    ImGui::InputTextMultiline("##notes", state.formNotes, sizeof(state.formNotes),
+                              ImVec2(fieldW, 90.0f));
 
     const bool online = client.connected.load();
     if (!online) {
         ImGui::BeginDisabled();
     }
 
-    if (ImGui::Button(state.editingId == 0 ? "Create" : "Save Changes")) {
+    const char* submitLabel = state.editingId == 0 ? "Create Movie" : "Save Changes";
+    if (ImGui::Button(submitLabel, ImVec2(fieldW, 0.0f))) {
         data::Movie candidate = makeMovieFromForm(state);
         std::string validationError;
         if (!logic::validateMovie(candidate, validationError)) {
-            state.statusMessage = "Invalid input: " + validationError;
+            state.statusMessage = "Invalid: " + validationError;
         } else {
             protocol::Message request;
             request.payload = candidate;
@@ -339,8 +733,8 @@ void renderForm(UiState& state, network::Client& client) {
                 : protocol::MessageKind::REQUEST_UPDATE;
             if (sendRequest(client, request)) {
                 state.statusMessage = state.editingId == 0
-                    ? "Add request sent."
-                    : "Update request sent.";
+                    ? "Movie added."
+                    : "Movie updated.";
                 resetForm(state);
             } else {
                 state.statusMessage = "Send failed.";
@@ -349,43 +743,83 @@ void renderForm(UiState& state, network::Client& client) {
     }
 
     if (state.editingId != 0) {
-        ImGui::SameLine();
-        if (ImGui::Button("Delete This")) {
+        ImGui::PushStyleColor(ImGuiCol_Button,        ImVec4(0.75f, 0.12f, 0.10f, 1.0f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.90f, 0.18f, 0.15f, 1.0f));
+        if (ImGui::Button("Delete This Movie", ImVec2((fieldW - 8.0f) * 0.55f, 0.0f))) {
             state.pendingDeleteId = state.editingId;
         }
+        ImGui::PopStyleColor(2);
         ImGui::SameLine();
-        if (ImGui::Button("Cancel")) {
+        if (ImGui::Button("Cancel", ImVec2(-1.0f, 0.0f))) {
             resetForm(state);
         }
     }
 
     if (!online) {
         ImGui::EndDisabled();
+        ImGui::TextColored(ImVec4(0.85f, 0.25f, 0.20f, 1.0f),
+                           "Connect to a server to make changes.");
     }
 }
 
-/**
- * renderStatusBar - summary metrics and last status message. Internal.
- */
-void renderStatusBar(UiState& state) {
-    const std::vector<data::Movie> snapshot = logic::snapshotCollection(state.localCollection);
-    const float mean = logic::averageRating(snapshot);
+// ──────────────────────────────────────────────────────────────────────────────
+//  Status bar
+// ──────────────────────────────────────────────────────────────────────────────
+void renderStatusBar(const UiState& state) {
+    const std::vector<data::Movie> snap    = logic::snapshotCollection(state.localCollection);
+    const logic::StatusCounts      counts  = logic::countByStatus(snap);
+    const float                    avg     = logic::averageRating(snap);
 
-    ImGui::SeparatorText("Summary");
-    ImGui::Text("Movies: %zu | Average rating: %.2f | Selected total: %lld min (%.1f h)",
-                snapshot.size(),
-                static_cast<double>(mean),
-                state.totalSelectedMinutes,
-                static_cast<double>(state.totalSelectedMinutes) / 60.0);
+    ImGui::Separator();
+    ImGui::Text("Movies: %zu  |  ", snap.size());
+    ImGui::SameLine(0.0f, 0.0f);
+    ImGui::PushStyleColor(ImGuiCol_Text, statusTextColor(data::Status::WATCHLIST));
+    ImGui::Text("Watchlist: %d", counts.watchlist);
+    ImGui::PopStyleColor();
+    ImGui::SameLine();
+    ImGui::PushStyleColor(ImGuiCol_Text, statusTextColor(data::Status::WATCHED));
+    ImGui::Text("Watched: %d", counts.watched);
+    ImGui::PopStyleColor();
+    ImGui::SameLine();
+    ImGui::PushStyleColor(ImGuiCol_Text, statusTextColor(data::Status::OWNED));
+    ImGui::Text("Owned: %d", counts.owned);
+    ImGui::PopStyleColor();
+    ImGui::SameLine();
+    ImGui::Text("  |  Avg rating: %.2f", static_cast<double>(avg));
+
+    if (!state.selectedIds.empty()) {
+        ImGui::SameLine();
+        ImGui::Text("  |  Selected: %zu  (%lld min = %.1fh)",
+                    state.selectedIds.size(),
+                    state.totalSelectedMinutes,
+                    static_cast<double>(state.totalSelectedMinutes) / 60.0);
+    }
+
     if (!state.statusMessage.empty()) {
-        ImGui::TextColored(ImVec4(0.85f, 0.42f, 0.05f, 1.0f), "%s", state.statusMessage.c_str());
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.85f, 0.42f, 0.05f, 1.0f));
+        ImGui::TextUnformatted(state.statusMessage.c_str());
+        ImGui::PopStyleColor();
     }
 }
 
-/**
- * processServerTraffic - drains the inbox and applies each decoded frame. Internal.
- */
+// ──────────────────────────────────────────────────────────────────────────────
+//  Server traffic processing + auto-reconnect
+// ──────────────────────────────────────────────────────────────────────────────
 void processServerTraffic(UiState& state, network::Client& client) {
+    // Auto-reconnect logic.
+    if (!client.connected.load() && state.autoReconnect) {
+        const double now = glfwGetTime();
+        if (now - state.lastReconnectAttemptTime >= 5.0) {
+            state.lastReconnectAttemptTime = now;
+            if (network::connectClient(client, state.hostBuffer, state.portBuffer)) {
+                state.statusMessage = "Reconnected.";
+                protocol::Message sync;
+                sync.kind = protocol::MessageKind::REQUEST_SYNC;
+                sendRequest(client, sync);
+            }
+        }
+    }
+
     std::vector<std::string> frames = network::drainInbox(client);
     if (frames.empty()) {
         return;
@@ -400,11 +834,52 @@ void processServerTraffic(UiState& state, network::Client& client) {
     refreshTotalDuration(state);
 }
 
+// ──────────────────────────────────────────────────────────────────────────────
+//  Keyboard shortcut handling
+// ──────────────────────────────────────────────────────────────────────────────
+void handleKeyboardShortcuts(UiState& state) {
+    ImGuiIO& io = ImGui::GetIO();
+    if (io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_N, false)) {
+        resetForm(state);
+        state.focusTitleNextFrame = true;
+    }
+    if (io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_A, false)) {
+        const auto all = logic::snapshotCollection(state.localCollection);
+        logic::FilterCriteria fc;
+        fc.showWatchlist  = state.showWatchlist;
+        fc.showWatched    = state.showWatched;
+        fc.showOwned      = state.showOwned;
+        fc.favoritesOnly  = state.favoritesOnly;
+        fc.titleSubstring = state.searchBuffer;
+        fc.genreFilter    = state.genreFilter;
+        fc.directorFilter = state.directorFilter;
+        fc.minRating      = state.minRatingFilter;
+        fc.maxRating      = state.maxRatingFilter;
+        fc.minYear        = state.minYearFilter;
+        fc.maxYear        = state.maxYearFilter;
+        for (const auto& m : logic::applyFilters(all, fc)) {
+            state.selectedIds.insert(m.id);
+        }
+        refreshTotalDuration(state);
+    }
+    if (io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_E, false)) {
+        exportToCsv(state);
+        state.statusMessage = "Exported to movie_collection_export.csv";
+    }
+    if (ImGui::IsKeyPressed(ImGuiKey_Escape, false) && state.editingId != 0) {
+        resetForm(state);
+    }
+}
+
 } // namespace
 
+// ──────────────────────────────────────────────────────────────────────────────
+//  Public API
+// ──────────────────────────────────────────────────────────────────────────────
+
 bool initialisePresentation(const std::string& windowTitle) {
-    glfwSetErrorCallback([](int errorCode, const char* description) {
-        std::cerr << "[glfw " << errorCode << "] " << description << "\n";
+    glfwSetErrorCallback([](int code, const char* desc) {
+        std::cerr << "[glfw " << code << "] " << desc << "\n";
     });
     if (!glfwInit()) {
         return false;
@@ -495,6 +970,8 @@ void runMainLoop(UiState& state, network::Client& client) {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
+        handleKeyboardShortcuts(state);
+
         const ImGuiViewport* viewport = ImGui::GetMainViewport();
         ImGui::SetNextWindowPos(viewport->WorkPos);
         ImGui::SetNextWindowSize(viewport->WorkSize);
@@ -504,18 +981,36 @@ void runMainLoop(UiState& state, network::Client& client) {
                                            | ImGuiWindowFlags_NoBringToFrontOnFocus;
         ImGui::Begin("Movie Collection Manager", nullptr, windowFlags);
 
+        // Top bar.
         renderConnectionBar(state, client);
         ImGui::Separator();
         renderToolbar(state, client);
+        renderAdvancedFilters(state);
+        renderStatsPanel(state);
         ImGui::Separator();
-        renderMovieTable(state);
-        ImGui::Separator();
-        renderForm(state, client);
-        ImGui::Separator();
+
+        // Main content: table on the left, form panel on the right.
+        const float formPanelWidth  = 310.0f;
+        const float statusBarHeight = 80.0f;
+        const float mainHeight      = ImGui::GetContentRegionAvail().y - statusBarHeight;
+        const float tablePanelWidth = ImGui::GetContentRegionAvail().x - formPanelWidth - 8.0f;
+
+        if (ImGui::BeginChild("##table_panel", ImVec2(tablePanelWidth, mainHeight), false,
+                              ImGuiWindowFlags_NoScrollbar)) {
+            renderMovieTable(state);
+        }
+        ImGui::EndChild();
+
+        ImGui::SameLine(0.0f, 8.0f);
+
+        if (ImGui::BeginChild("##form_panel", ImVec2(formPanelWidth, mainHeight), false)) {
+            renderForm(state, client);
+        }
+        ImGui::EndChild();
+
         renderStatusBar(state);
 
-        // Open delete confirmation modal — must be at window level so the
-        // popup ID matches BeginPopupModal called inside renderDeleteModal.
+        // Delete confirmation modal.
         if (state.pendingDeleteId != 0) {
             ImGui::OpenPopup("Confirm Delete");
         }
@@ -524,11 +1019,13 @@ void runMainLoop(UiState& state, network::Client& client) {
         ImGui::End();
 
         ImGui::Render();
-        int displayWidth = 0;
-        int displayHeight = 0;
-        glfwGetFramebufferSize(windowHandle, &displayWidth, &displayHeight);
-        glViewport(0, 0, displayWidth, displayHeight);
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        int fw = 0, fh = 0;
+        glfwGetFramebufferSize(windowHandle, &fw, &fh);
+        glViewport(0, 0, fw, fh);
+        const ImVec4 clearColor = state.darkMode
+            ? ImVec4(0.11f, 0.12f, 0.15f, 1.0f)
+            : ImVec4(1.0f,  1.0f,  1.0f,  1.0f);
+        glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
         glClear(GL_COLOR_BUFFER_BIT);
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         glfwSwapBuffers(windowHandle);

@@ -1,3 +1,0 @@
-C:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/ixwebsocket-subbuild/CMakeFiles/ixwebsocket-populate.dir
-C:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/ixwebsocket-subbuild/CMakeFiles/ALL_BUILD.dir
-C:/Users/rafat/source/repos/hackrizen-movie-collection-manager/build/_deps/ixwebsocket-subbuild/CMakeFiles/ZERO_CHECK.dir

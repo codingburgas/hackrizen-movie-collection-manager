@@ -7,6 +7,7 @@
 #include "data.h"
 
 #include <algorithm>
+#include <ctime>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -50,6 +51,7 @@ nlohmann::json movieToJson(const Movie& movie) {
         {"director",        movie.director},
         {"genres",          movie.genres},
         {"notes",           movie.notes},
+        {"dateAdded",       movie.dateAdded},
     };
 }
 
@@ -66,6 +68,7 @@ Movie movieFromJson(const nlohmann::json& node) {
     movie.director        = clampString(node.value("director", std::string{}), MAX_DIRECTOR_LENGTH);
     movie.genres          = clampString(node.value("genres",   std::string{}), MAX_GENRES_LENGTH);
     movie.notes           = clampString(node.value("notes",    std::string{}), MAX_NOTES_LENGTH);
+    movie.dateAdded       = node.value("dateAdded", std::uint64_t{0});
     return movie;
 }
 
@@ -77,11 +80,15 @@ void clampMovieStrings(Movie& m) {
     m.notes    = clampString(m.notes,    MAX_NOTES_LENGTH);
 }
 } // namespace
+cmake --build build --config Debug - j
 
 std::uint64_t addMovie(Collection& collection, const Movie& prototype) {
     std::lock_guard<std::mutex> lock(collection.mutex);
     Movie stored = prototype;
     stored.id = collection.nextId++;
+    if (stored.dateAdded == 0) {
+        stored.dateAdded = static_cast<std::uint64_t>(std::time(nullptr));
+    }
     clampMovieStrings(stored);
     collection.movies.push_back(std::move(stored));
     ++collection.revision;
@@ -121,6 +128,10 @@ bool updateMovie(Collection& collection, const Movie& movie) {
             existing.director = clampString(movie.director, MAX_DIRECTOR_LENGTH);
             existing.genres   = clampString(movie.genres,   MAX_GENRES_LENGTH);
             existing.notes    = clampString(movie.notes,    MAX_NOTES_LENGTH);
+            // Preserve original dateAdded; do not overwrite on update.
+            if (movie.dateAdded != 0) {
+                existing.dateAdded = movie.dateAdded;
+            }
             ++collection.revision;
             return true;
         }

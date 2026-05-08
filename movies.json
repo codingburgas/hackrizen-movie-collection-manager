@@ -1,6 +1,7 @@
 {
   "movies": [
     {
+      "dateAdded": 0,
       "director": "chicho",
       "durationMinutes": 167,
       "favorite": true,
@@ -13,9 +14,10 @@
       "year": 2067
     },
     {
+      "dateAdded": 0,
       "director": "warner",
       "durationMinutes": 140,
-      "favorite": true,
+      "favorite": false,
       "genres": "action",
       "id": 2,
       "notes": "batman has aura",
@@ -23,8 +25,21 @@
       "status": 0,
       "title": "batman",
       "year": 2000
+    },
+    {
+      "dateAdded": 0,
+      "director": "david laid",
+      "durationMinutes": 130,
+      "favorite": true,
+      "genres": "action",
+      "id": 3,
+      "notes": "",
+      "rating": 9.5,
+      "status": 1,
+      "title": "spiderman",
+      "year": 2008
     }
   ],
-  "revision": 3,
+  "revision": 1,
   "version": 2
 }

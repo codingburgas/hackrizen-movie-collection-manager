@@ -32,6 +32,12 @@ struct UiState {
     logic::SortOrder sortOrder = logic::SortOrder::ASCENDING;
     char searchBuffer[256] = "";
 
+    // Status filter: which statuses are currently visible.
+    bool showWatchlist = true;
+    bool showWatched   = true;
+    bool showOwned     = true;
+    bool favoritesOnly = false;
+
     // New-movie form fields.
     char formTitle[256]    = "";
     char formDirector[256] = "";
@@ -64,6 +70,28 @@ struct UiState {
 
     // Monotonic revision tracked so we know when the local mirror changed.
     std::uint64_t lastKnownRevision = 0;
+
+    // Advanced filter controls (extended FilterCriteria).
+    bool showAdvancedFilters = false;
+    char genreFilter[64]     = "";
+    char directorFilter[64]  = "";
+    float minRatingFilter    = 0.0f;
+    float maxRatingFilter    = 10.0f;
+    int minYearFilter        = 1880;
+    int maxYearFilter        = 2200;
+
+    // Statistics panel visibility.
+    bool showStatsPanel = false;
+
+    // Theme / appearance.
+    bool darkMode = false;
+
+    // Auto-reconnect state.
+    bool autoReconnect              = true;
+    double lastReconnectAttemptTime = -99.0;
+
+    // Signals to renderForm that the Title field should grab keyboard focus.
+    bool focusTitleNextFrame = false;
 };
 
 /**
