@@ -80,7 +80,6 @@ void clampMovieStrings(Movie& m) {
     m.notes    = clampString(m.notes,    MAX_NOTES_LENGTH);
 }
 } // namespace
-cmake --build build --config Debug - j
 
 std::uint64_t addMovie(Collection& collection, const Movie& prototype) {
     std::lock_guard<std::mutex> lock(collection.mutex);

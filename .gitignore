@@ -1,4 +1,5 @@
 .vs/
+.claude/
 *.ipch
 *.VC.db
 
@@ -7,3 +8,6 @@ build/
 build-*/
 out/
 cmake-build-*/
+
+# Docker
+.dockerignore

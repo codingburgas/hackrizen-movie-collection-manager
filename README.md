@@ -186,6 +186,53 @@ The client status bar shows **ONLINE** when connected. If the server isn't reach
 
 ---
 
+## Docker
+
+The server can be run inside Docker (no display required — server-only build, no OpenGL/GLFW).
+
+### Quick start
+
+```bash
+# Build the image
+docker build -t mcm-server .
+
+# Run the server (persists collection to a named volume)
+docker run -p 9275:9275 -v mcm-data:/data mcm-server
+```
+
+### Docker Compose
+
+```bash
+docker compose up --build   # build and start
+docker compose up -d        # start in background
+docker compose down         # stop and remove containers
+docker compose logs -f      # stream logs
+```
+
+### Connecting a local client to the containerised server
+
+```bash
+# Windows
+.\build\Debug\mcm.exe client 127.0.0.1 9275
+
+# Linux / macOS
+./build/mcm client 127.0.0.1 9275
+```
+
+### Custom port
+
+```bash
+docker run -p 8080:8080 mcm-server 8080 /data/collection.json
+```
+
+### Wipe saved data
+
+```bash
+docker volume rm mcm-data
+```
+
+---
+
 ## License
 
 This project was created for educational purposes as part of the **CodingBurgas 2025–2026 Sprint Programme**.
