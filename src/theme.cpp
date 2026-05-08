@@ -11,8 +11,36 @@ namespace {
 
 constexpr const char* kBoldFontPath = "assets/fonts/Inter-Bold.ttf";
 
-ImVec4 rgba(float r, float g, float b, float a = 1.0f) {
+ImVec4 v4(float r, float g, float b, float a = 1.0f) {
     return ImVec4(r, g, b, a);
+}
+
+ImVec4 fromU32(ImU32 c) {
+    return ImGui::ColorConvertU32ToFloat4(c);
+}
+
+Palette g_palette = {};
+
+void applyCommonStyle() {
+    ImGuiStyle& s = ImGui::GetStyle();
+    s.WindowRounding    = 10.0f;
+    s.ChildRounding     = 12.0f;
+    s.PopupRounding     = 8.0f;
+    s.FrameRounding     = 8.0f;
+    s.GrabRounding      = 6.0f;
+    s.TabRounding       = 8.0f;
+    s.ScrollbarRounding = 6.0f;
+    s.WindowPadding     = ImVec2(14.0f, 12.0f);
+    s.FramePadding      = ImVec2(10.0f, 7.0f);
+    s.ItemSpacing       = ImVec2(10.0f, 8.0f);
+    s.ItemInnerSpacing  = ImVec2(8.0f, 6.0f);
+    s.IndentSpacing     = 18.0f;
+    s.ScrollbarSize     = 12.0f;
+    s.GrabMinSize       = 12.0f;
+    s.WindowBorderSize  = 0.0f;
+    s.ChildBorderSize   = 0.0f;
+    s.FrameBorderSize   = 0.0f;
+    s.PopupBorderSize   = 1.0f;
 }
 
 } // namespace
@@ -40,179 +68,157 @@ void loadFonts(float pixelSize) {
 void applyLightOrange() {
     ImGui::StyleColorsLight();
 
+    Palette p;
+    p.isDark            = false;
+    p.bgGradTop         = IM_COL32(244, 244, 248, 255);
+    p.bgGradBot         = IM_COL32(255, 255, 255, 255);
+    p.cardFill          = IM_COL32(255, 255, 255, 240);
+    p.cardHighlight     = IM_COL32(255, 255, 255, 220);
+    p.cardShadow        = IM_COL32(20,  24,  40,  28);
+    p.panelBorder       = IM_COL32(214, 218, 230, 255);
+    p.accentA           = IM_COL32(255, 122, 26,  255);
+    p.accentB           = IM_COL32(255, 157, 74,  255);
+    p.statusWatchlist   = IM_COL32(217, 153, 13,  255);
+    p.statusWatched     = IM_COL32(64,  140, 244, 255);
+    p.statusOwned       = IM_COL32(38,  184, 77,  255);
+    p.connectionOnline  = IM_COL32(38,  184, 77,  255);
+    p.connectionOffline = IM_COL32(225, 65,  60,  255);
+    p.connectionPending = IM_COL32(240, 165, 30,  255);
+    p.textPrimary       = IM_COL32(22,  25,  34,  255);
+    p.textDim           = IM_COL32(107, 112, 128, 255);
+    p.trackFill         = IM_COL32(0,   0,   0,   24);
+    g_palette = p;
+
     ImGuiStyle& style = ImGui::GetStyle();
     ImVec4* c = style.Colors;
+    c[ImGuiCol_Text]                  = fromU32(p.textPrimary);
+    c[ImGuiCol_TextDisabled]          = fromU32(p.textDim);
+    c[ImGuiCol_WindowBg]              = v4(0, 0, 0, 0); // transparent: bg is gradient
+    c[ImGuiCol_ChildBg]               = v4(0, 0, 0, 0);
+    c[ImGuiCol_PopupBg]               = fromU32(p.cardFill);
+    c[ImGuiCol_MenuBarBg]             = fromU32(p.cardFill);
+    c[ImGuiCol_Border]                = fromU32(p.panelBorder);
+    c[ImGuiCol_BorderShadow]          = v4(0, 0, 0, 0);
+    c[ImGuiCol_FrameBg]               = v4(0.96f, 0.96f, 0.97f, 1.0f);
+    c[ImGuiCol_FrameBgHovered]        = v4(0.93f, 0.93f, 0.95f, 1.0f);
+    c[ImGuiCol_FrameBgActive]         = v4(0.90f, 0.90f, 0.93f, 1.0f);
+    c[ImGuiCol_TitleBg]               = fromU32(p.cardFill);
+    c[ImGuiCol_TitleBgActive]         = fromU32(p.cardFill);
+    c[ImGuiCol_TitleBgCollapsed]      = fromU32(p.cardFill);
+    c[ImGuiCol_ScrollbarBg]           = v4(0, 0, 0, 0);
+    c[ImGuiCol_ScrollbarGrab]         = v4(0.78f, 0.78f, 0.81f, 1.0f);
+    c[ImGuiCol_ScrollbarGrabHovered]  = fromU32(p.accentB);
+    c[ImGuiCol_ScrollbarGrabActive]   = fromU32(p.accentA);
+    c[ImGuiCol_CheckMark]             = fromU32(p.accentA);
+    c[ImGuiCol_SliderGrab]            = fromU32(p.accentA);
+    c[ImGuiCol_SliderGrabActive]      = fromU32(p.accentB);
+    c[ImGuiCol_Button]                = v4(0.94f, 0.94f, 0.96f, 1.0f);
+    c[ImGuiCol_ButtonHovered]         = v4(0.88f, 0.88f, 0.91f, 1.0f);
+    c[ImGuiCol_ButtonActive]          = v4(0.82f, 0.82f, 0.85f, 1.0f);
+    c[ImGuiCol_Header]                = v4(0.93f, 0.93f, 0.95f, 1.0f);
+    c[ImGuiCol_HeaderHovered]         = v4(1.00f, 0.85f, 0.65f, 1.0f);
+    c[ImGuiCol_HeaderActive]          = v4(1.00f, 0.75f, 0.45f, 1.0f);
+    c[ImGuiCol_Separator]             = fromU32(p.panelBorder);
+    c[ImGuiCol_SeparatorHovered]      = fromU32(p.accentB);
+    c[ImGuiCol_SeparatorActive]       = fromU32(p.accentA);
+    c[ImGuiCol_ResizeGrip]            = v4(0.85f, 0.85f, 0.88f, 0.6f);
+    c[ImGuiCol_ResizeGripHovered]     = fromU32(p.accentB);
+    c[ImGuiCol_ResizeGripActive]      = fromU32(p.accentA);
+    c[ImGuiCol_Tab]                   = v4(0.93f, 0.93f, 0.95f, 1.0f);
+    c[ImGuiCol_TabHovered]            = fromU32(p.accentB);
+    c[ImGuiCol_TabActive]             = fromU32(p.accentA);
+    c[ImGuiCol_TabUnfocused]          = v4(0.96f, 0.96f, 0.97f, 1.0f);
+    c[ImGuiCol_TabUnfocusedActive]    = v4(0.93f, 0.93f, 0.95f, 1.0f);
+    c[ImGuiCol_TableHeaderBg]         = v4(0.96f, 0.94f, 0.92f, 1.0f);
+    c[ImGuiCol_TableBorderStrong]     = fromU32(p.panelBorder);
+    c[ImGuiCol_TableBorderLight]      = v4(0.92f, 0.92f, 0.94f, 1.0f);
+    c[ImGuiCol_TableRowBg]            = v4(0, 0, 0, 0);
+    c[ImGuiCol_TableRowBgAlt]         = v4(0, 0, 0, 0.025f);
+    c[ImGuiCol_TextSelectedBg]        = v4(1.00f, 0.85f, 0.65f, 1.0f);
+    c[ImGuiCol_NavHighlight]          = fromU32(p.accentA);
+    c[ImGuiCol_DragDropTarget]        = fromU32(p.accentA);
 
-    const ImVec4 white         = rgba(1.00f, 1.00f, 1.00f);
-    const ImVec4 nearWhite     = rgba(0.97f, 0.97f, 0.98f);
-    const ImVec4 lightGrey     = rgba(0.92f, 0.92f, 0.94f);
-    const ImVec4 frameGrey     = rgba(0.96f, 0.96f, 0.97f);
-    const ImVec4 frameGreyHov  = rgba(0.92f, 0.92f, 0.94f);
-    const ImVec4 frameGreyAct  = rgba(0.88f, 0.88f, 0.90f);
-    const ImVec4 borderGrey    = rgba(0.82f, 0.82f, 0.85f);
-    const ImVec4 separatorGrey = rgba(0.85f, 0.85f, 0.88f);
-    const ImVec4 darkText      = rgba(0.10f, 0.10f, 0.12f);
-    const ImVec4 disabledText  = rgba(0.55f, 0.55f, 0.58f);
-
-    const ImVec4 orange        = rgba(1.00f, 0.55f, 0.10f);
-    const ImVec4 orangeHover   = rgba(1.00f, 0.65f, 0.22f);
-    const ImVec4 orangeActive  = rgba(0.85f, 0.42f, 0.05f);
-    const ImVec4 orangeTintLo  = rgba(1.00f, 0.85f, 0.65f);
-    const ImVec4 orangeTintMid = rgba(1.00f, 0.75f, 0.45f);
-    const ImVec4 cream         = rgba(0.95f, 0.92f, 0.88f);
-
-    c[ImGuiCol_Text]                  = darkText;
-    c[ImGuiCol_TextDisabled]          = disabledText;
-
-    c[ImGuiCol_WindowBg]              = white;
-    c[ImGuiCol_ChildBg]               = white;
-    c[ImGuiCol_PopupBg]               = white;
-    c[ImGuiCol_MenuBarBg]             = white;
-
-    c[ImGuiCol_Border]                = borderGrey;
-    c[ImGuiCol_BorderShadow]          = rgba(0.0f, 0.0f, 0.0f, 0.0f);
-
-    c[ImGuiCol_FrameBg]               = frameGrey;
-    c[ImGuiCol_FrameBgHovered]        = frameGreyHov;
-    c[ImGuiCol_FrameBgActive]         = frameGreyAct;
-
-    c[ImGuiCol_TitleBg]               = nearWhite;
-    c[ImGuiCol_TitleBgActive]         = lightGrey;
-    c[ImGuiCol_TitleBgCollapsed]      = nearWhite;
-
-    c[ImGuiCol_ScrollbarBg]           = nearWhite;
-    c[ImGuiCol_ScrollbarGrab]         = rgba(0.78f, 0.78f, 0.81f);
-    c[ImGuiCol_ScrollbarGrabHovered]  = orangeTintMid;
-    c[ImGuiCol_ScrollbarGrabActive]   = orange;
-
-    c[ImGuiCol_CheckMark]             = orangeActive;
-    c[ImGuiCol_SliderGrab]            = orange;
-    c[ImGuiCol_SliderGrabActive]      = orangeActive;
-
-    c[ImGuiCol_Button]                = orange;
-    c[ImGuiCol_ButtonHovered]         = orangeHover;
-    c[ImGuiCol_ButtonActive]          = orangeActive;
-
-    c[ImGuiCol_Header]                = lightGrey;
-    c[ImGuiCol_HeaderHovered]         = orangeTintLo;
-    c[ImGuiCol_HeaderActive]          = orangeTintMid;
-
-    c[ImGuiCol_Separator]             = separatorGrey;
-    c[ImGuiCol_SeparatorHovered]      = orangeHover;
-    c[ImGuiCol_SeparatorActive]       = orange;
-
-    c[ImGuiCol_ResizeGrip]            = orangeTintLo;
-    c[ImGuiCol_ResizeGripHovered]     = orangeHover;
-    c[ImGuiCol_ResizeGripActive]      = orangeActive;
-
-    c[ImGuiCol_Tab]                   = lightGrey;
-    c[ImGuiCol_TabHovered]            = orangeHover;
-    c[ImGuiCol_TabActive]             = orange;
-    c[ImGuiCol_TabUnfocused]          = nearWhite;
-    c[ImGuiCol_TabUnfocusedActive]    = lightGrey;
-
-    c[ImGuiCol_TableHeaderBg]         = cream;
-    c[ImGuiCol_TableBorderStrong]     = borderGrey;
-    c[ImGuiCol_TableBorderLight]      = separatorGrey;
-    c[ImGuiCol_TableRowBg]            = white;
-    c[ImGuiCol_TableRowBgAlt]         = nearWhite;
-
-    c[ImGuiCol_TextSelectedBg]        = orangeTintLo;
-    c[ImGuiCol_NavHighlight]          = orange;
-    c[ImGuiCol_DragDropTarget]        = orangeActive;
-
-    style.WindowRounding    = 6.0f;
-    style.PopupRounding     = 4.0f;
-    style.FrameRounding     = 4.0f;
-    style.GrabRounding      = 4.0f;
-    style.TabRounding       = 4.0f;
-    style.ScrollbarRounding = 4.0f;
-
-    style.WindowPadding     = ImVec2(10.0f, 10.0f);
-    style.FramePadding      = ImVec2(8.0f, 5.0f);
-    style.ItemSpacing       = ImVec2(8.0f, 6.0f);
-
-    style.FrameBorderSize   = 1.0f;
-    style.WindowBorderSize  = 1.0f;
+    applyCommonStyle();
 }
 
 void applyDarkTheme() {
     ImGui::StyleColorsDark();
 
+    Palette p;
+    p.isDark            = true;
+    p.bgGradTop         = IM_COL32(14,  16,  20,  255);
+    p.bgGradBot         = IM_COL32(22,  25,  34,  255);
+    p.cardFill          = IM_COL32(27,  31,  42,  235);
+    p.cardHighlight     = IM_COL32(255, 255, 255, 14);
+    p.cardShadow        = IM_COL32(0,   0,   0,   90);
+    p.panelBorder       = IM_COL32(48,  53,  68,  255);
+    p.accentA           = IM_COL32(255, 138, 31,  255);
+    p.accentB           = IM_COL32(255, 184, 107, 255);
+    p.statusWatchlist   = IM_COL32(241, 184, 61,  255);
+    p.statusWatched     = IM_COL32(99,  165, 255, 255);
+    p.statusOwned       = IM_COL32(58,  211, 110, 255);
+    p.connectionOnline  = IM_COL32(58,  211, 110, 255);
+    p.connectionOffline = IM_COL32(231, 78,  72,  255);
+    p.connectionPending = IM_COL32(245, 178, 60,  255);
+    p.textPrimary       = IM_COL32(236, 238, 245, 255);
+    p.textDim           = IM_COL32(124, 129, 148, 255);
+    p.trackFill         = IM_COL32(255, 255, 255, 22);
+    g_palette = p;
+
     ImGuiStyle& style = ImGui::GetStyle();
     ImVec4* c = style.Colors;
+    c[ImGuiCol_Text]                  = fromU32(p.textPrimary);
+    c[ImGuiCol_TextDisabled]          = fromU32(p.textDim);
+    c[ImGuiCol_WindowBg]              = v4(0, 0, 0, 0);
+    c[ImGuiCol_ChildBg]               = v4(0, 0, 0, 0);
+    c[ImGuiCol_PopupBg]               = fromU32(p.cardFill);
+    c[ImGuiCol_MenuBarBg]             = fromU32(p.cardFill);
+    c[ImGuiCol_Border]                = fromU32(p.panelBorder);
+    c[ImGuiCol_BorderShadow]          = v4(0, 0, 0, 0);
+    c[ImGuiCol_FrameBg]               = v4(0.16f, 0.18f, 0.23f, 1.0f);
+    c[ImGuiCol_FrameBgHovered]        = v4(0.22f, 0.24f, 0.31f, 1.0f);
+    c[ImGuiCol_FrameBgActive]         = v4(0.28f, 0.30f, 0.39f, 1.0f);
+    c[ImGuiCol_TitleBg]               = fromU32(p.cardFill);
+    c[ImGuiCol_TitleBgActive]         = fromU32(p.cardFill);
+    c[ImGuiCol_TitleBgCollapsed]      = fromU32(p.cardFill);
+    c[ImGuiCol_ScrollbarBg]           = v4(0, 0, 0, 0);
+    c[ImGuiCol_ScrollbarGrab]         = v4(0.30f, 0.32f, 0.40f, 1.0f);
+    c[ImGuiCol_ScrollbarGrabHovered]  = fromU32(p.accentB);
+    c[ImGuiCol_ScrollbarGrabActive]   = fromU32(p.accentA);
+    c[ImGuiCol_CheckMark]             = fromU32(p.accentA);
+    c[ImGuiCol_SliderGrab]            = fromU32(p.accentA);
+    c[ImGuiCol_SliderGrabActive]      = fromU32(p.accentB);
+    c[ImGuiCol_Button]                = v4(0.20f, 0.22f, 0.28f, 1.0f);
+    c[ImGuiCol_ButtonHovered]         = v4(0.27f, 0.29f, 0.38f, 1.0f);
+    c[ImGuiCol_ButtonActive]          = v4(0.33f, 0.36f, 0.46f, 1.0f);
+    c[ImGuiCol_Header]                = v4(0.22f, 0.24f, 0.31f, 1.0f);
+    c[ImGuiCol_HeaderHovered]         = v4(0.55f, 0.30f, 0.05f, 0.55f);
+    c[ImGuiCol_HeaderActive]          = v4(0.65f, 0.35f, 0.05f, 0.80f);
+    c[ImGuiCol_Separator]             = fromU32(p.panelBorder);
+    c[ImGuiCol_SeparatorHovered]      = fromU32(p.accentB);
+    c[ImGuiCol_SeparatorActive]       = fromU32(p.accentA);
+    c[ImGuiCol_ResizeGrip]            = v4(0.30f, 0.32f, 0.40f, 0.6f);
+    c[ImGuiCol_ResizeGripHovered]     = fromU32(p.accentB);
+    c[ImGuiCol_ResizeGripActive]      = fromU32(p.accentA);
+    c[ImGuiCol_Tab]                   = v4(0.18f, 0.20f, 0.26f, 1.0f);
+    c[ImGuiCol_TabHovered]            = fromU32(p.accentB);
+    c[ImGuiCol_TabActive]             = fromU32(p.accentA);
+    c[ImGuiCol_TabUnfocused]          = v4(0.14f, 0.16f, 0.21f, 1.0f);
+    c[ImGuiCol_TabUnfocusedActive]    = v4(0.18f, 0.20f, 0.26f, 1.0f);
+    c[ImGuiCol_TableHeaderBg]         = v4(0.16f, 0.18f, 0.23f, 1.0f);
+    c[ImGuiCol_TableBorderStrong]     = fromU32(p.panelBorder);
+    c[ImGuiCol_TableBorderLight]      = v4(0.20f, 0.22f, 0.28f, 1.0f);
+    c[ImGuiCol_TableRowBg]            = v4(0, 0, 0, 0);
+    c[ImGuiCol_TableRowBgAlt]         = v4(1.0f, 1.0f, 1.0f, 0.018f);
+    c[ImGuiCol_TextSelectedBg]        = v4(0.55f, 0.30f, 0.05f, 0.55f);
+    c[ImGuiCol_NavHighlight]          = fromU32(p.accentA);
+    c[ImGuiCol_DragDropTarget]        = fromU32(p.accentA);
 
-    const ImVec4 bg0        = rgba(0.11f, 0.12f, 0.15f);
-    const ImVec4 bg1        = rgba(0.16f, 0.17f, 0.21f);
-    const ImVec4 bg2        = rgba(0.20f, 0.21f, 0.26f);
-    const ImVec4 bg3        = rgba(0.25f, 0.26f, 0.32f);
-    const ImVec4 border     = rgba(0.30f, 0.31f, 0.40f);
-    const ImVec4 text       = rgba(0.90f, 0.91f, 0.95f);
-    const ImVec4 textDim    = rgba(0.55f, 0.56f, 0.65f);
+    applyCommonStyle();
+}
 
-    const ImVec4 orange     = rgba(1.00f, 0.55f, 0.10f);
-    const ImVec4 orangeHov  = rgba(1.00f, 0.65f, 0.25f);
-    const ImVec4 orangeAct  = rgba(0.85f, 0.40f, 0.05f);
-    const ImVec4 orangeTint = rgba(0.55f, 0.28f, 0.05f, 0.60f);
-
-    c[ImGuiCol_Text]                  = text;
-    c[ImGuiCol_TextDisabled]          = textDim;
-    c[ImGuiCol_WindowBg]              = bg0;
-    c[ImGuiCol_ChildBg]               = bg1;
-    c[ImGuiCol_PopupBg]               = bg1;
-    c[ImGuiCol_MenuBarBg]             = bg1;
-    c[ImGuiCol_Border]                = border;
-    c[ImGuiCol_BorderShadow]          = rgba(0.0f, 0.0f, 0.0f, 0.0f);
-    c[ImGuiCol_FrameBg]               = bg2;
-    c[ImGuiCol_FrameBgHovered]        = bg3;
-    c[ImGuiCol_FrameBgActive]         = rgba(0.30f, 0.31f, 0.40f);
-    c[ImGuiCol_TitleBg]               = bg1;
-    c[ImGuiCol_TitleBgActive]         = bg2;
-    c[ImGuiCol_TitleBgCollapsed]      = bg0;
-    c[ImGuiCol_ScrollbarBg]           = bg0;
-    c[ImGuiCol_ScrollbarGrab]         = bg3;
-    c[ImGuiCol_ScrollbarGrabHovered]  = orangeTint;
-    c[ImGuiCol_ScrollbarGrabActive]   = orange;
-    c[ImGuiCol_CheckMark]             = orange;
-    c[ImGuiCol_SliderGrab]            = orange;
-    c[ImGuiCol_SliderGrabActive]      = orangeAct;
-    c[ImGuiCol_Button]                = orange;
-    c[ImGuiCol_ButtonHovered]         = orangeHov;
-    c[ImGuiCol_ButtonActive]          = orangeAct;
-    c[ImGuiCol_Header]                = bg3;
-    c[ImGuiCol_HeaderHovered]         = orangeTint;
-    c[ImGuiCol_HeaderActive]          = rgba(0.65f, 0.35f, 0.05f, 0.80f);
-    c[ImGuiCol_Separator]             = border;
-    c[ImGuiCol_SeparatorHovered]      = orangeHov;
-    c[ImGuiCol_SeparatorActive]       = orange;
-    c[ImGuiCol_ResizeGrip]            = orangeTint;
-    c[ImGuiCol_ResizeGripHovered]     = orangeHov;
-    c[ImGuiCol_ResizeGripActive]      = orangeAct;
-    c[ImGuiCol_Tab]                   = bg2;
-    c[ImGuiCol_TabHovered]            = orangeHov;
-    c[ImGuiCol_TabActive]             = orange;
-    c[ImGuiCol_TabUnfocused]          = bg1;
-    c[ImGuiCol_TabUnfocusedActive]    = bg2;
-    c[ImGuiCol_TableHeaderBg]         = bg2;
-    c[ImGuiCol_TableBorderStrong]     = border;
-    c[ImGuiCol_TableBorderLight]      = rgba(0.22f, 0.23f, 0.30f);
-    c[ImGuiCol_TableRowBg]            = bg1;
-    c[ImGuiCol_TableRowBgAlt]         = bg0;
-    c[ImGuiCol_TextSelectedBg]        = orangeTint;
-    c[ImGuiCol_NavHighlight]          = orange;
-    c[ImGuiCol_DragDropTarget]        = orangeAct;
-
-    style.WindowRounding    = 6.0f;
-    style.PopupRounding     = 4.0f;
-    style.FrameRounding     = 4.0f;
-    style.GrabRounding      = 4.0f;
-    style.TabRounding       = 4.0f;
-    style.ScrollbarRounding = 4.0f;
-    style.WindowPadding     = ImVec2(10.0f, 10.0f);
-    style.FramePadding      = ImVec2(8.0f, 5.0f);
-    style.ItemSpacing       = ImVec2(8.0f, 6.0f);
-    style.FrameBorderSize   = 1.0f;
-    style.WindowBorderSize  = 1.0f;
+const Palette& currentPalette() {
+    return g_palette;
 }
 
 } // namespace mcm::presentation::theme

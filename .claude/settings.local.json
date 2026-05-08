@@ -8,7 +8,8 @@
       "Bash(Select-Object FullName)",
       "Bash(Format-Table -AutoSize)",
       "Bash(cmake -S . -B build -DCMAKE_BUILD_TYPE=Release)",
-      "Bash(cmake --build build --config Release -j)"
+      "Bash(cmake --build build --config Release -j)",
+      "Bash(cmake --build build --config Debug)"
     ]
   }
 }

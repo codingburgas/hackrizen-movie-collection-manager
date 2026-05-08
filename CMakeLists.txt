@@ -100,7 +100,7 @@ set(MCM_SOURCES
 )
 
 if(IMGUI_AVAILABLE)
-    list(APPEND MCM_SOURCES src/presentation.cpp src/theme.cpp)
+    list(APPEND MCM_SOURCES src/presentation.cpp src/theme.cpp src/ui_anim.cpp)
 endif()
 
 add_executable(mcm ${MCM_SOURCES})

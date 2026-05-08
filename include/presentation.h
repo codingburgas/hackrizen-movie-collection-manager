@@ -10,14 +10,54 @@
 
 #include <cstdint>
 #include <string>
+#include <unordered_map>
 #include <unordered_set>
 #include <vector>
 
 #include "data.h"
 #include "logic.h"
 #include "network.h"
+#include "ui_anim.h"
 
 namespace mcm::presentation {
+
+/**
+ * AnimState - per-frame eased values, hover ledger, and cached frame time
+ * powering the cinematic UI. Lives inside UiState.
+ */
+struct AnimState {
+    anim::Eased totalCount;
+    anim::Eased watchlistCount;
+    anim::Eased watchedCount;
+    anim::Eased ownedCount;
+    anim::Eased avgRating;
+    anim::Eased bestRating;
+    anim::Eased totalHours;
+
+    anim::Eased watchlistFraction;
+    anim::Eased watchedFraction;
+    anim::Eased ownedFraction;
+
+    anim::Eased filterDrawerHeight;     // 0 = closed
+    anim::Eased statsHeight;            // 0 = stats panel hidden
+    anim::Eased themeFade;              // 0 = light, 1 = dark
+    anim::Eased connectionPulse;        // glow opacity for online dot
+
+    anim::HoverLedger hover;
+
+    // Per-id favorite-pulse timer: seconds remaining (>0 = animating).
+    std::unordered_map<std::uint64_t, float> favoritePulse;
+
+    // Snapshot of last-known favorite flag, used to detect transitions.
+    std::unordered_map<std::uint64_t, bool> lastFavorite;
+
+    // Per-genre eased fraction so genre bars slide in smoothly.
+    std::unordered_map<std::string, anim::Eased> genreEased;
+
+    double lastFrameTime = 0.0;
+    float  spinPhase     = 0.0f;
+    bool   firstFrame    = true;
+};
 
 /**
  * UiState - all mutable UI-side data. Passed by reference to render.
@@ -92,6 +132,12 @@ struct UiState {
 
     // Signals to renderForm that the Title field should grab keyboard focus.
     bool focusTitleNextFrame = false;
+
+    // App-bar settings popup (host/port + auto-reconnect).
+    bool showSettingsPopup = false;
+
+    // Per-frame animation state — never persisted.
+    AnimState anim;
 };
 
 /**
