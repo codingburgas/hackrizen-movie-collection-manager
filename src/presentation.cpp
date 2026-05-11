@@ -79,6 +79,7 @@ void resetForm(UiState& state) {
     state.formStatus   = 0;
     state.formFavorite = false;
     state.editingId    = 0;
+    state.focusTitleNextFrame = true;
 }
 
 bool sendRequest(network::Client& client, const protocol::Message& message) {
@@ -1180,8 +1181,7 @@ void renderForm(UiState& state, network::Client& client, float dt) {
     const float btnH = 38.0f;
     const ImVec2 btnMn = ImGui::GetCursorScreenPos();
     const ImVec2 btnMx(btnMn.x + fieldW, btnMn.y + btnH);
-    ImGui::InvisibleButton("##submit", ImVec2(fieldW, btnH));
-    const bool sClicked = ImGui::IsItemClicked();
+    const bool sClicked = ImGui::InvisibleButton("##submit", ImVec2(fieldW, btnH));
     const bool sHover   = ImGui::IsItemHovered();
     const float sH01    = anim::tickHover(state.anim.hover, ImGui::GetID("##submit"), sHover, dt);
 
