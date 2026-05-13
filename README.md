@@ -236,3 +236,5 @@ docker volume rm mcm-data
 ## License
 
 This project was created for educational purposes as part of the **CodingBurgas 2025–2026 Sprint Programme**.
+
+---
